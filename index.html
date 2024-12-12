@@ -7,7 +7,7 @@
   <style>
     /* Общий стиль для страницы */
     body {
-      font-family: 'Georgia', serif;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
       margin: 0;
       padding: 0;
       overflow: hidden;
@@ -96,7 +96,7 @@
       opacity: 1;
     }
 
-    /* SVG контейнер */
+    /* SVG-анимация */
     #loader {
       position: fixed;
       top: 0;
@@ -109,20 +109,12 @@
       background: radial-gradient(circle, #1b2735, #090a0f);
       z-index: 10;
     }
-
-    #loader object {
-      border: 3px solid #87ceeb; /* Рамка */
-      border-radius: 10px;
-      padding: 10px;
-      width: 500px;
-      height: 200px;
-    }
   </style>
 </head>
 <body>
   <!-- Загрузка -->
   <div id="loader">
-    <object data="loader.svg" type="image/svg+xml"></object>
+    <object data="ascetics.svg" type="image/svg+xml"></object>
   </div>
 
   <!-- Холст для звезд -->
@@ -140,11 +132,11 @@
   <script>
     // Убираем загрузку и показываем контент
     window.onload = function () {
-  setTimeout(() => {
-    document.getElementById("loader").style.display = "none"; // Скрываем SVG
-    document.getElementById("main-content").style.display = "flex"; // Показываем основной контент
-  }, 5500); // Таймер на 7.5 секунд, чтобы завершилась вся анимация
-};
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none"; // Скрываем SVG
+        document.getElementById("main-content").style.display = "flex"; // Показываем основной контент
+      }, 4000); // Время загрузки в миллисекундах
+    };
 
     // Звездная анимация
     const canvas = document.getElementById('starCanvas');
