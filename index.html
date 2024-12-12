@@ -25,21 +25,14 @@
       z-index: -1;
     }
 
-    /* Автоматическая рамка для контента */
+    /* Основной контент */
     #main-content {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      height: calc(100vh - 40px); /* Автоматическая подгонка */
-      width: calc(100% - 40px);
-      margin: 20px;
-      padding: 30px;
-      border: 3px solid rgba(255, 255, 255, 0.5);
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+      height: 100vh;
       display: none; /* Скрыто до окончания загрузки */
     }
 
@@ -49,6 +42,10 @@
       color: #ffd700; /* Золотой */
       text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
       margin-bottom: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.5); /* Рамка на текст */
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: inline-block;
     }
 
     p {
@@ -57,6 +54,12 @@
       color: #f5f5f5;
       line-height: 1.8;
       margin-bottom: 20px;
+      max-width: 600px;
+      text-align: center;
+      padding: 10px 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3); /* Рамка на абзац */
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
     }
 
     .button {
@@ -92,42 +95,78 @@
       opacity: 1;
     }
 
-    /* Волшебный взрыв при загрузке */
+    /* Загрузка (loading dots) */
     #loader {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background: radial-gradient(circle, #1b2735, #090a0f);
-      overflow: hidden;
       z-index: 10;
     }
 
-    .explosion {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: radial-gradient(circle, #ffcc33, #ff6600, transparent);
-      border-radius: 50%;
-      animation: explosion 2s ease-out forwards;
+    .spinner-box {
+      position: relative;
+      width: 100px;
+      height: 100px;
     }
 
-    @keyframes explosion {
-      0% {
-        transform: scale(1) translate(0, 0);
-        opacity: 1;
+    .pulse-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .pulse-bubble {
+      width: 20px;
+      height: 20px;
+      background: #ffd700;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+
+    .pulse-bubble-1 {
+      animation-delay: 0s;
+    }
+
+    .pulse-bubble-2 {
+      animation-delay: 0.2s;
+    }
+
+    .pulse-bubble-3 {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(0.5);
+        opacity: 0.5;
       }
-      100% {
-        transform: scale(4) translate(calc(var(--dx) * 200px), calc(var(--dy) * 200px));
-        opacity: 0;
+      50% {
+        transform: scale(1);
+        opacity: 1;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Загрузка: Волшебный взрыв -->
-  <div id="loader"></div>
+  <!-- Загрузка: Loading Dots -->
+  <div id="loader">
+    <div class="spinner-box">
+      <div class="pulse-container">
+        <div class="pulse-bubble pulse-bubble-1"></div>
+        <div class="pulse-bubble pulse-bubble-2"></div>
+        <div class="pulse-bubble pulse-bubble-3"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- Холст для звезд -->
   <canvas id="starCanvas"></canvas>
@@ -141,29 +180,12 @@
   </div>
 
   <script>
-    // Волшебный взрыв
-    const loader = document.getElementById("loader");
-
-    function createExplosion() {
-      for (let i = 0; i < 40; i++) {
-        const explosion = document.createElement("div");
-        explosion.className = "explosion";
-        explosion.style.setProperty("--dx", Math.random() * 2 - 1);
-        explosion.style.setProperty("--dy", Math.random() * 2 - 1);
-        explosion.style.left = "50%";
-        explosion.style.top = "50%";
-        loader.appendChild(explosion);
-
-        setTimeout(() => explosion.remove(), 2000);
-      }
-    }
-
+    // Убираем загрузку и показываем контент
     window.onload = function () {
-      createExplosion(); // Волшебный взрыв
       setTimeout(() => {
-        loader.style.display = "none";
+        document.getElementById("loader").style.display = "none";
         document.getElementById("main-content").style.display = "flex";
-      }, 2500); // Переход к контенту через 2.5 секунды
+      }, 2000); // Загрузка длится 2 секунды
     };
 
     // Звездная анимация
