@@ -2,63 +2,29 @@
   <defs>
     <!-- Градиент для обводки -->
     <linearGradient id="stroke-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#4A90E2" /> <!-- Синий -->
-      <stop offset="100%" stop-color="#9013FE" /> <!-- Фиолетовый -->
+      <stop offset="0%" stop-color="#8E8E8E" /> <!-- Светло-серый -->
+      <stop offset="100%" stop-color="#2E2E2E" /> <!-- Тёмно-серый -->
     </linearGradient>
   </defs>
 
-  <!-- Текст с уменьшенным размером -->
+  <!-- Текст с минималистичным шрифтом -->
   <text
-    font-family="Cinzel, serif"
-    font-size="30"
+    font-family="Futura, Helvetica, Arial, sans-serif"
+    font-size="25"
     font-weight="bold"
     fill="transparent"
     stroke="url(#stroke-gradient)"
-    stroke-width="2"
-    letter-spacing="15"
+    stroke-width="1.5"
+    letter-spacing="8"
     text-anchor="middle"
     dominant-baseline="middle"
     x="50%"
     y="50%"
+    opacity="0"
   >
-    <!-- Анимация появления букв -->
-    <tspan opacity="0" transform="scale(0)">
-      <animate attributeName="opacity" from="0" to="1" begin="0s" dur="0.4s" fill="freeze" />
-      <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="0s" dur="0.4s" fill="freeze" />
-      A
-    </tspan>
-    <tspan dx="20" opacity="0" transform="scale(0)">
-      <animate attributeName="opacity" from="0" to="1" begin="0.4s" dur="0.4s" fill="freeze" />
-      <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="0.4s" dur="0.4s" fill="freeze" />
-      S
-    </tspan>
-    <tspan dx="20" opacity="0" transform="scale(0)">
-      <animate attributeName="opacity" from="0" to="1" begin="0.8s" dur="0.4s" fill="freeze" />
-      <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="0.8s" dur="0.4s" fill="freeze" />
-      C
-    </tspan>
-    <tspan dx="20" opacity="0" transform="scale(0)">
-      <animate attributeName="opacity" from="0" to="1" begin="1.2s" dur="0.4s" fill="freeze" />
-      <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="1.2s" dur="0.4s" fill="freeze" />
-      E
-    </tspan>
-    <tspan dx="20" opacity="0" transform="scale(0)">
-      <animate attributeName="opacity" from="0" to="1" begin="1.6s" dur="0.4s" fill="freeze" />
-      <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="1.6s" dur="0.4s" fill="freeze" />
-      T
-    </tspan>
-    <tspan dx="20" opacity="0" transform="scale(0)">
-      <animate attributeName="opacity" from="0" to="1" begin="2s" dur="0.4s" fill="freeze" />
-      <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="2s" dur="0.4s" fill="freeze" />
-      I
-    </tspan>
-    <tspan dx="20" opacity="0" transform="scale(0)">
-      <animate attributeName="opacity" from="0" to="1" begin="2.4s" dur="0.4s" fill="freeze" />
-      <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="2.4s" dur="0.4s" fill="freeze" />
-      C
-    </tspan>
-    <!-- Эффект яркого свечения -->
-    <animate attributeName="stroke-width" from="2" to="5" begin="2.8s" dur="0.5s" fill="freeze" />
-    <animate attributeName="opacity" from="1" to="0.8" begin="2.8s" dur="0.5s" fill="freeze" />
+    <!-- Появление текста -->
+    ASCETIC
+    <animate attributeName="opacity" from="0" to="1" begin="0s" dur="1.5s" fill="freeze" />
+    <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="0s" dur="1.5s" additive="replace" fill="freeze" />
   </text>
 </svg>
