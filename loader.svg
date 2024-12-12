@@ -7,15 +7,15 @@
     </linearGradient>
   </defs>
 
-  <!-- Текст с прописным шрифтом -->
+  <!-- Текст с большими прописными буквами -->
   <text
-    font-family="Cinzel Decorative, serif"
-    font-size="40"
+    font-family="Cinzel, serif"
+    font-size="50"
     font-weight="bold"
     fill="transparent"
     stroke="url(#stroke-gradient)"
     stroke-width="2"
-    letter-spacing="8"
+    letter-spacing="12"
     text-anchor="middle"
     dominant-baseline="middle"
     x="50%"
@@ -25,37 +25,37 @@
     <tspan opacity="0" transform="scale(0)">
       <animate attributeName="opacity" from="0" to="1" begin="0s" dur="0.4s" fill="freeze" />
       <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="0s" dur="0.4s" fill="freeze" />
-      a
+      A
     </tspan>
-    <tspan dx="15" opacity="0" transform="scale(0)">
+    <tspan dx="20" opacity="0" transform="scale(0)">
       <animate attributeName="opacity" from="0" to="1" begin="0.4s" dur="0.4s" fill="freeze" />
       <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="0.4s" dur="0.4s" fill="freeze" />
-      s
+      S
     </tspan>
-    <tspan dx="15" opacity="0" transform="scale(0)">
+    <tspan dx="20" opacity="0" transform="scale(0)">
       <animate attributeName="opacity" from="0" to="1" begin="0.8s" dur="0.4s" fill="freeze" />
       <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="0.8s" dur="0.4s" fill="freeze" />
-      c
+      C
     </tspan>
-    <tspan dx="15" opacity="0" transform="scale(0)">
+    <tspan dx="20" opacity="0" transform="scale(0)">
       <animate attributeName="opacity" from="0" to="1" begin="1.2s" dur="0.4s" fill="freeze" />
       <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="1.2s" dur="0.4s" fill="freeze" />
-      e
+      E
     </tspan>
-    <tspan dx="15" opacity="0" transform="scale(0)">
+    <tspan dx="20" opacity="0" transform="scale(0)">
       <animate attributeName="opacity" from="0" to="1" begin="1.6s" dur="0.4s" fill="freeze" />
       <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="1.6s" dur="0.4s" fill="freeze" />
-      t
+      T
     </tspan>
-    <tspan dx="15" opacity="0" transform="scale(0)">
+    <tspan dx="20" opacity="0" transform="scale(0)">
       <animate attributeName="opacity" from="0" to="1" begin="2s" dur="0.4s" fill="freeze" />
       <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="2s" dur="0.4s" fill="freeze" />
-      i
+      I
     </tspan>
-    <tspan dx="15" opacity="0" transform="scale(0)">
+    <tspan dx="20" opacity="0" transform="scale(0)">
       <animate attributeName="opacity" from="0" to="1" begin="2.4s" dur="0.4s" fill="freeze" />
       <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="2.4s" dur="0.4s" fill="freeze" />
-      c
+      C
     </tspan>
     <!-- Эффект яркого свечения -->
     <animate attributeName="stroke-width" from="2" to="5" begin="2.8s" dur="0.5s" fill="freeze" />
