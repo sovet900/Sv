@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ритуал "Стакан воды"</title>
   <style>
-    /* Общий стиль */
+    /* Общий стиль для страницы */
     body {
       font-family: 'Georgia', serif;
       margin: 0;
@@ -80,6 +80,20 @@
     .button:hover {
       transform: scale(1.1);
       background: #2e8b57;
+    }
+
+    /* Прозрачная PNG картинка */
+    #main-image {
+      max-width: 250px;
+      height: auto;
+      margin: 20px 0;
+      opacity: 0.9;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
+
+    #main-image:hover {
+      transform: scale(1.1);
+      opacity: 1;
     }
 
     /* SVG-анимация */
@@ -176,6 +190,7 @@
   <div id="main-content">
     <h1>Ритуал</h1>
     <h2>"Стакан воды"</h2>
+    <img id="main-image" src="water-glass.png" alt="Стакан воды">
     <p>С помощью этого ритуала вы можете загадывать желания, заряжая воду своей энергией.</p>
     <a href="phases.html" class="button">Начать</a>
   </div>
