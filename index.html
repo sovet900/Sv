@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ритуал "Стакан воды"</title>
   <style>
-    /* Стили для всей страницы */
+    /* Общий стиль для страницы */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      overflow: hidden; /* Скрываем скролл во время анимации */
+      overflow: hidden;
       background: linear-gradient(135deg, #2c3e50, #4ca1af);
       color: white;
     }
 
-    /* Стиль холста для звезд */
+    /* Холст для звезд */
     canvas {
       position: fixed;
       top: 0;
@@ -25,15 +25,26 @@
       z-index: -1;
     }
 
-    /* Приветствие */
+    /* Центрирование контента */
+    #main-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 100vh;
+      display: none; /* Скрыто до окончания загрузки */
+    }
+
     h1 {
-      margin-top: 50px;
-      font-size: 2.5em;
+      font-size: 3em;
+      margin: 0.5em 0;
     }
 
     p {
       font-size: 1.2em;
-      margin: 20px;
+      margin: 1em 0;
+      max-width: 600px;
     }
 
     .button {
@@ -67,27 +78,49 @@
       z-index: 10;
     }
 
-    #loader span {
-      font-size: 24px;
-      color: white;
-      animation: fade 1.5s infinite;
+    #loader .magic-circle {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 5px solid transparent;
+      border-top: 5px solid white;
+      animation: rotate 1.5s linear infinite;
     }
 
-    @keyframes fade {
-      0%, 100% { opacity: 0; }
-      50% { opacity: 1; }
+    #loader .magic-circle:before,
+    #loader .magic-circle:after {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border-radius: 50%;
+      border: 5px solid transparent;
+      border-top: 5px solid white;
+      animation: rotate 1.5s linear infinite;
     }
 
-    /* Скрываем основной контент до окончания загрузки */
-    #main-content {
-      display: none;
+    #loader .magic-circle:before {
+      animation-delay: 0.5s;
+    }
+
+    #loader .magic-circle:after {
+      animation-delay: 1s;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
     }
   </style>
 </head>
 <body>
   <!-- Анимация загрузки -->
   <div id="loader">
-    <span>✨ Волшебство начинается... ✨</span>
+    <div class="magic-circle"></div>
   </div>
 
   <!-- Холст для звезд -->
@@ -105,8 +138,8 @@
     window.onload = function () {
       setTimeout(() => {
         document.getElementById('loader').style.display = 'none';
-        document.getElementById('main-content').style.display = 'block';
-      }, 3000); // Время загрузки 3 секунды
+        document.getElementById('main-content').style.display = 'flex';
+      }, 3000); // Задержка загрузки 3 секунды
     };
 
     // Звездная анимация
