@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200">
+  <!-- Градиент для текста -->
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color: #87CEEB; stop-opacity: 1" />
+      <stop offset="100%" style="stop-color: #FFD700; stop-opacity: 1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Текстовые элементы -->
+  <text x="50" y="120" fill="url(#gradient)" font-family="Cinzel, serif" font-size="60" font-weight="bold" letter-spacing="10">
+    ASCETIC
+  </text>
+</svg>
