@@ -140,11 +140,11 @@
   <script>
     // Убираем загрузку и показываем контент
     window.onload = function () {
-      setTimeout(() => {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("main-content").style.display = "flex";
-      }, 2000); // Загрузка длится 2 секунды
-    };
+  setTimeout(() => {
+    document.getElementById("loader").style.display = "none"; // Скрываем SVG
+    document.getElementById("main-content").style.display = "flex"; // Показываем основной контент
+  }, 4000); // Таймер на 7.5 секунд, чтобы завершилась вся анимация
+};
 
     // Звездная анимация
     const canvas = document.getElementById('starCanvas');
