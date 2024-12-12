@@ -11,7 +11,7 @@
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      background: linear-gradient(135deg, #1c1f26, #28313b);
       color: white;
     }
 
@@ -37,29 +37,30 @@
     }
 
     h1 {
-      font-size: 3em;
+      font-size: 2.5em;
       font-weight: bold;
-      color: #ffd700; /* Золотой */
-      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
-      margin-bottom: 20px;
-      border: 3px solid rgba(255, 255, 255, 0.5); /* Рамка на текст */
-      padding: 10px 20px;
-      border-radius: 10px;
-      display: inline-block;
+      color: #87ceeb; /* Голубой */
+      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 2em;
+      font-weight: bold;
+      color: #f5f5dc; /* Бежевый */
+      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+      margin: 0;
     }
 
     p {
       font-size: 1.2em;
       font-family: 'Arial', sans-serif;
-      color: #f5f5f5;
+      color: #f0f8ff;
       line-height: 1.8;
       margin-bottom: 20px;
       max-width: 600px;
       text-align: center;
       padding: 10px 20px;
-      border: 3px solid rgba(255, 255, 255, 0.3); /* Рамка на абзац */
-      border-radius: 10px;
-      backdrop-filter: blur(5px);
     }
 
     .button {
@@ -68,7 +69,7 @@
       font-size: 1.2em;
       font-weight: bold;
       color: white;
-      background: #3cba92;
+      background: #32a852;
       border: none;
       border-radius: 8px;
       text-decoration: none;
@@ -78,7 +79,7 @@
 
     .button:hover {
       transform: scale(1.1);
-      background: #2a8a68;
+      background: #2e8b57;
     }
 
     /* Прозрачная PNG картинка */
@@ -95,7 +96,7 @@
       opacity: 1;
     }
 
-    /* Загрузка (loading dots) */
+    /* Загрузка */
     #loader {
       position: fixed;
       top: 0;
@@ -105,67 +106,36 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(circle, #1b2735, #090a0f);
+      background: radial-gradient(circle, #1c1f26, #28313b);
       z-index: 10;
     }
 
-    .spinner-box {
-      position: relative;
-      width: 100px;
-      height: 100px;
-    }
-
-    .pulse-container {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-    }
-
-    .pulse-bubble {
-      width: 20px;
-      height: 20px;
-      background: #ffd700;
-      border-radius: 50%;
-      animation: pulse 1.5s infinite ease-in-out;
-    }
-
-    .pulse-bubble-1 {
-      animation-delay: 0s;
-    }
-
-    .pulse-bubble-2 {
-      animation-delay: 0.2s;
-    }
-
-    .pulse-bubble-3 {
-      animation-delay: 0.4s;
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(0.5);
-        opacity: 0.5;
-      }
-      50% {
-        transform: scale(1);
-        opacity: 1;
-      }
+    /* Стили для SVG */
+    svg {
+      width: 120px;
+      height: 120px;
     }
   </style>
 </head>
 <body>
-  <!-- Загрузка: Loading Dots -->
+  <!-- Загрузка -->
   <div id="loader">
-    <div class="spinner-box">
-      <div class="pulse-container">
-        <div class="pulse-bubble pulse-bubble-1"></div>
-        <div class="pulse-bubble pulse-bubble-2"></div>
-        <div class="pulse-bubble pulse-bubble-3"></div>
-      </div>
-    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0" y="0" viewBox="0 0 120 120" enable-background="new 0 0 120 120" xml:space="preserve">
+      <defs>
+        <clipPath id="circle-clip">
+          <path class="clip" d="M101.807,123.37c10-0.352,18.193,5.401,18.193,5.401V0H0v128.771c0,0,9.701-5.227,17.069-5.227s10.464,6.314,20.877,6.314
+          c10.175,0,12.703-4.209,22.053-4.209s11.981,5.438,20.578,5.438S91.807,123.722,101.807,123.37z">
+          </path>
+        </clipPath>
+      </defs>
+      <g clip-path="url(#circle-clip)">
+        <path class="logo" d="M84.995 62.896h-5.788v3.061h5.788c1.037 0 1.68-0.611 1.68-1.512C86.675 63.582 86.032 62.896 84.995 62.896zM86.211 55.411c0-0.828-0.68-1.368-1.43-1.368h-5.574v2.808h5.574C85.531 56.85 86.211 56.274 86.211 55.411zM60 0C26.863 0 0 26.863 0 60c0 33.138 26.863 60 60 60 33.138 0 60-26.862 60-60C120 26.863 93.138 0 60 0zM48.974 72.004h-7.217v-9.178h-8.54v9.178H26V47.996h7.217v8.495h8.54v-8.495h7.217V72.004zM69.094 72.004H52.836V47.996h7.218v17.672h9.04V72.004zM86.962 72.004H71.99V47.996h14.471c4.931 0 7.075 3.312 7.075 6.119 0 2.987-1.752 5.003-4.074 5.507C92.035 60.018 94 62.393 94 65.488 94 68.836 91.749 72.004 86.962 72.004z"
+        />
+        <text x="50%" y="65%" text-anchor="middle" font-size="16" font-family="Arial" fill="#FFD700" font-weight="bold">
+          Ascetic
+        </text>
+      </g>
+    </svg>
   </div>
 
   <!-- Холст для звезд -->
@@ -173,7 +143,8 @@
 
   <!-- Основной контент -->
   <div id="main-content">
-    <h1>Ритуал "Стакан воды"</h1>
+    <h1>Ритуал</h1>
+    <h2>"Стакан воды"</h2>
     <img id="main-image" src="water-glass.png" alt="Стакан воды">
     <p>С помощью этого ритуала вы можете загадывать желания, заряжая воду своей энергией.</p>
     <a href="phases.html" class="button">Начать</a>
