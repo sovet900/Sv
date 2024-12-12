@@ -96,7 +96,7 @@
       opacity: 1;
     }
 
-    /* SVG-анимация */
+    /* SVG контейнер */
     #loader {
       position: fixed;
       top: 0;
@@ -110,77 +110,19 @@
       z-index: 10;
     }
 
-    svg {
-      width: 600px;
+    #loader object {
+      border: 3px solid #87ceeb; /* Рамка */
+      border-radius: 10px;
+      padding: 10px;
+      width: 500px;
       height: 200px;
-    }
-
-    text {
-      fill: url(#gradient);
-      font-family: 'Cinzel', serif; /* Строгий и загадочный шрифт */
-      font-size: 60px;
-      font-weight: bold;
-      letter-spacing: 10px;
-      opacity: 0;
-      animation: fade-in 0.8s ease forwards;
-    }
-
-    text:nth-child(1) {
-      animation-delay: 0.2s;
-    }
-
-    text:nth-child(2) {
-      animation-delay: 0.4s;
-    }
-
-    text:nth-child(3) {
-      animation-delay: 0.6s;
-    }
-
-    text:nth-child(4) {
-      animation-delay: 0.8s;
-    }
-
-    text:nth-child(5) {
-      animation-delay: 1s;
-    }
-
-    text:nth-child(6) {
-      animation-delay: 1.2s;
-    }
-
-    text:nth-child(7) {
-      animation-delay: 1.4s;
-    }
-
-    @keyframes fade-in {
-      to {
-        opacity: 1;
-      }
     }
   </style>
 </head>
 <body>
   <!-- Загрузка -->
   <div id="loader">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200">
-      <!-- Градиент для текста -->
-      <defs>
-        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color: #87CEEB; stop-opacity: 1" />
-          <stop offset="100%" style="stop-color: #FFD700; stop-opacity: 1" />
-        </linearGradient>
-      </defs>
-
-      <!-- Текстовые элементы -->
-      <text x="50" y="120">A</text>
-      <text x="110" y="120">S</text>
-      <text x="170" y="120">C</text>
-      <text x="230" y="120">E</text>
-      <text x="290" y="120">T</text>
-      <text x="350" y="120">I</text>
-      <text x="410" y="120">C</text>
-    </svg>
+    <object data="loader.svg" type="image/svg+xml"></object>
   </div>
 
   <!-- Холст для звезд -->
