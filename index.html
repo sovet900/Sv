@@ -3,69 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To-Do List</title>
+  <title>Стакан воды</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
       margin: 20px;
+      background-color: #f9f9f9;
     }
-    .todo-item {
-      margin: 10px 0;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      display: flex;
-      justify-content: space-between;
+    h1 {
+      color: #007BFF;
     }
     .button {
+      display: inline-block;
       margin: 20px;
       padding: 10px 20px;
-      font-size: 16px;
+      font-size: 18px;
       border: none;
       border-radius: 5px;
       background-color: #007BFF;
       color: white;
       cursor: pointer;
+      text-decoration: none;
     }
     .button:hover {
       background-color: #0056b3;
     }
+    img {
+      max-width: 80%;
+      height: auto;
+      margin: 20px 0;
+    }
   </style>
 </head>
 <body>
-  <h1>To-Do List</h1>
-  <div id="todo-list"></div>
-  <button class="button" onclick="addTodo()">Добавить задачу</button>
-  <script>
-    const todos = [];
-
-    function addTodo() {
-      const task = prompt("Введите задачу:");
-      if (task) {
-        todos.push(task);
-        renderList();
-      }
-    }
-
-    function deleteTodo(index) {
-      todos.splice(index, 1);
-      renderList();
-    }
-
-    function renderList() {
-      const list = document.getElementById("todo-list");
-      list.innerHTML = "";
-      todos.forEach((todo, index) => {
-        const item = document.createElement("div");
-        item.className = "todo-item";
-        item.innerHTML = `
-          <span>${todo}</span>
-          <button onclick="deleteTodo(${index})">Удалить</button>
-        `;
-        list.appendChild(item);
-      });
-    }
-  </script>
+  <h1>Ритуал "Стакан воды"</h1>
+  <p>С помощью этого ритуала вы можете загадывать желания, заряжая воду своей энергией.</p>
+  <img src="water-glass.jpg" alt="Стакан воды">
+  <a href="phases.html" class="button">Начать</a>
 </body>
 </html>
