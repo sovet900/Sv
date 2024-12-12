@@ -7,15 +7,15 @@
     </linearGradient>
   </defs>
 
-  <!-- Текст с анимацией -->
+  <!-- Текст с уменьшенным размером и строгим шрифтом -->
   <text
-    font-family="Cinzel, serif"
-    font-size="60"
+    font-family="Trajan Pro, serif"
+    font-size="40"
     font-weight="bold"
     fill="transparent"
     stroke="url(#stroke-gradient)"
     stroke-width="2"
-    letter-spacing="10"
+    letter-spacing="8"
     text-anchor="middle"
     dominant-baseline="middle"
     x="50%"
@@ -27,32 +27,32 @@
       <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="0s" dur="0.4s" fill="freeze" />
       A
     </tspan>
-    <tspan dx="20" opacity="0" transform="scale(0)">
+    <tspan dx="15" opacity="0" transform="scale(0)">
       <animate attributeName="opacity" from="0" to="1" begin="0.4s" dur="0.4s" fill="freeze" />
       <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="0.4s" dur="0.4s" fill="freeze" />
       S
     </tspan>
-    <tspan dx="20" opacity="0" transform="scale(0)">
+    <tspan dx="15" opacity="0" transform="scale(0)">
       <animate attributeName="opacity" from="0" to="1" begin="0.8s" dur="0.4s" fill="freeze" />
       <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="0.8s" dur="0.4s" fill="freeze" />
       C
     </tspan>
-    <tspan dx="20" opacity="0" transform="scale(0)">
+    <tspan dx="15" opacity="0" transform="scale(0)">
       <animate attributeName="opacity" from="0" to="1" begin="1.2s" dur="0.4s" fill="freeze" />
       <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="1.2s" dur="0.4s" fill="freeze" />
       E
     </tspan>
-    <tspan dx="20" opacity="0" transform="scale(0)">
+    <tspan dx="15" opacity="0" transform="scale(0)">
       <animate attributeName="opacity" from="0" to="1" begin="1.6s" dur="0.4s" fill="freeze" />
       <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="1.6s" dur="0.4s" fill="freeze" />
       T
     </tspan>
-    <tspan dx="20" opacity="0" transform="scale(0)">
+    <tspan dx="15" opacity="0" transform="scale(0)">
       <animate attributeName="opacity" from="0" to="1" begin="2s" dur="0.4s" fill="freeze" />
       <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="2s" dur="0.4s" fill="freeze" />
       I
     </tspan>
-    <tspan dx="20" opacity="0" transform="scale(0)">
+    <tspan dx="15" opacity="0" transform="scale(0)">
       <animate attributeName="opacity" from="0" to="1" begin="2.4s" dur="0.4s" fill="freeze" />
       <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="2.4s" dur="0.4s" fill="freeze" />
       C
