@@ -5,23 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ритуал "Стакан воды"</title>
   <style>
+    /* Стили для всей страницы */
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
       margin: 0;
       padding: 0;
-      overflow: hidden; /* Чтобы анимация не выходила за пределы экрана */
-      background: linear-gradient(to bottom, #1a237e, #311b92);
+      overflow: hidden; /* Скрываем скролл во время анимации */
+      background: linear-gradient(135deg, #2c3e50, #4ca1af);
       color: white;
     }
+
+    /* Стиль холста для звезд */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    /* Приветствие */
     h1 {
       margin-top: 50px;
       font-size: 2.5em;
     }
+
     p {
       font-size: 1.2em;
       margin: 20px;
     }
+
     .button {
       display: inline-block;
       margin: 20px;
@@ -34,27 +48,68 @@
       cursor: pointer;
       text-decoration: none;
     }
+
     .button:hover {
       background-color: #512da8;
     }
-    canvas {
+
+    /* Анимация загрузки */
+    #loader {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1;
+      background: linear-gradient(135deg, #2c3e50, #4ca1af);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+
+    #loader span {
+      font-size: 24px;
+      color: white;
+      animation: fade 1.5s infinite;
+    }
+
+    @keyframes fade {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+
+    /* Скрываем основной контент до окончания загрузки */
+    #main-content {
+      display: none;
     }
   </style>
 </head>
 <body>
+  <!-- Анимация загрузки -->
+  <div id="loader">
+    <span>✨ Волшебство начинается... ✨</span>
+  </div>
+
+  <!-- Холст для звезд -->
   <canvas id="starCanvas"></canvas>
-  <h1>Ритуал "Стакан воды"</h1>
-  <p>С помощью этого ритуала вы можете загадывать желания, заряжая воду своей энергией.</p>
-  <a href="phases.html" class="button">Начать</a>
+
+  <!-- Основной контент -->
+  <div id="main-content">
+    <h1>Ритуал "Стакан воды"</h1>
+    <p>С помощью этого ритуала вы можете загадывать желания, заряжая воду своей энергией.</p>
+    <a href="phases.html" class="button">Начать</a>
+  </div>
 
   <script>
-    // Скрипт для анимации звезд
+    // Магическая загрузка
+    window.onload = function () {
+      setTimeout(() => {
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+      }, 3000); // Время загрузки 3 секунды
+    };
+
+    // Звездная анимация
     const canvas = document.getElementById('starCanvas');
     const ctx = canvas.getContext('2d');
 
@@ -62,9 +117,8 @@
     canvas.height = window.innerHeight;
 
     let stars = [];
-    const numStars = 100;
+    const numStars = 150;
 
-    // Функция для создания звезд
     function createStar() {
       return {
         x: Math.random() * canvas.width,
@@ -75,12 +129,10 @@
       };
     }
 
-    // Заполняем массив звездами
     for (let i = 0; i < numStars; i++) {
       stars.push(createStar());
     }
 
-    // Анимация звезд
     function animateStars() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -101,7 +153,6 @@
 
     animateStars();
 
-    // Обновление размера холста при изменении окна
     window.addEventListener('resize', () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
