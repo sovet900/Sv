@@ -7,15 +7,15 @@
     </linearGradient>
   </defs>
 
-  <!-- Текст с большими прописными буквами -->
+  <!-- Текст с уменьшенным размером -->
   <text
     font-family="Cinzel, serif"
-    font-size="50"
+    font-size="30"
     font-weight="bold"
     fill="transparent"
     stroke="url(#stroke-gradient)"
     stroke-width="2"
-    letter-spacing="12"
+    letter-spacing="15"
     text-anchor="middle"
     dominant-baseline="middle"
     x="50%"
