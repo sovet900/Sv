@@ -2,29 +2,29 @@
   <defs>
     <!-- Градиент для обводки -->
     <linearGradient id="stroke-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#8E8E8E" /> <!-- Светло-серый -->
-      <stop offset="100%" stop-color="#2E2E2E" /> <!-- Тёмно-серый -->
+      <stop offset="0%" stop-color="#4A4A4A" /> <!-- Тёмно-серый -->
+      <stop offset="100%" stop-color="#1A1A1A" /> <!-- Почти чёрный -->
     </linearGradient>
   </defs>
 
   <!-- Текст с минималистичным шрифтом -->
   <text
-    font-family="Futura, Helvetica, Arial, sans-serif"
-    font-size="25"
+    font-family="Helvetica Neue, Arial, sans-serif"
+    font-size="40"
     font-weight="bold"
     fill="transparent"
     stroke="url(#stroke-gradient)"
     stroke-width="1.5"
-    letter-spacing="8"
+    letter-spacing="5"
     text-anchor="middle"
     dominant-baseline="middle"
     x="50%"
     y="50%"
     opacity="0"
   >
-    <!-- Появление текста -->
-    ASCETIC
-    <animate attributeName="opacity" from="0" to="1" begin="0s" dur="1.5s" fill="freeze" />
-    <animateTransform attributeName="transform" type="scale" from="0" to="1" begin="0s" dur="1.5s" additive="replace" fill="freeze" />
+    ASCETICS
+    <!-- Анимация плавного появления текста -->
+    <animate attributeName="opacity" from="0" to="1" begin="0s" dur="1s" fill="freeze" />
+    <animateTransform attributeName="transform" type="scale" from="0.8" to="1" begin="0s" dur="1s" fill="freeze" />
   </text>
 </svg>
