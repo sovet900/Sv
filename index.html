@@ -3,16 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Стакан воды</title>
+  <title>Ритуал "Стакан воды"</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      margin: 20px;
-      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      overflow: hidden; /* Чтобы анимация не выходила за пределы экрана */
+      background: linear-gradient(to bottom, #1a237e, #311b92);
+      color: white;
     }
     h1 {
-      color: #007BFF;
+      margin-top: 50px;
+      font-size: 2.5em;
+    }
+    p {
+      font-size: 1.2em;
+      margin: 20px;
     }
     .button {
       display: inline-block;
@@ -21,25 +29,87 @@
       font-size: 18px;
       border: none;
       border-radius: 5px;
-      background-color: #007BFF;
+      background-color: #673ab7;
       color: white;
       cursor: pointer;
       text-decoration: none;
     }
     .button:hover {
-      background-color: #0056b3;
+      background-color: #512da8;
     }
-    img {
-      max-width: 80%;
-      height: auto;
-      margin: 20px 0;
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
   </style>
 </head>
 <body>
+  <canvas id="starCanvas"></canvas>
   <h1>Ритуал "Стакан воды"</h1>
   <p>С помощью этого ритуала вы можете загадывать желания, заряжая воду своей энергией.</p>
-  <img src="water-glass.jpg" alt="Стакан воды">
   <a href="phases.html" class="button">Начать</a>
+
+  <script>
+    // Скрипт для анимации звезд
+    const canvas = document.getElementById('starCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let stars = [];
+    const numStars = 100;
+
+    // Функция для создания звезд
+    function createStar() {
+      return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2,
+        alpha: Math.random(),
+        speed: Math.random() * 0.05,
+      };
+    }
+
+    // Заполняем массив звездами
+    for (let i = 0; i < numStars; i++) {
+      stars.push(createStar());
+    }
+
+    // Анимация звезд
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      stars.forEach((star) => {
+        star.alpha += star.speed;
+        if (star.alpha > 1 || star.alpha < 0) {
+          star.speed = -star.speed;
+        }
+
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animateStars);
+    }
+
+    animateStars();
+
+    // Обновление размера холста при изменении окна
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      stars = [];
+      for (let i = 0; i < numStars; i++) {
+        stars.push(createStar());
+      }
+    });
+  </script>
 </body>
 </html>
