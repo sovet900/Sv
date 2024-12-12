@@ -7,11 +7,11 @@
   <style>
     /* Общий стиль для страницы */
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: 'Georgia', serif;
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background: linear-gradient(135deg, #2e3b4e, #1c1f26);
+      background: linear-gradient(135deg, #243b55, #141e30);
       color: white;
     }
 
@@ -25,7 +25,7 @@
       z-index: -1;
     }
 
-    /* Центрирование контента */
+    /* Рамка для основного контента */
     #main-content {
       display: flex;
       flex-direction: column;
@@ -33,23 +33,31 @@
       align-items: center;
       text-align: center;
       height: 100vh;
+      width: 90%;
+      max-width: 700px;
+      margin: auto;
+      padding: 30px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
       display: none; /* Скрыто до окончания загрузки */
     }
 
     h1 {
-      font-size: 3.5em;
+      font-size: 3em;
       font-weight: bold;
-      color: #d4af37; /* Золотой */
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      color: #ffd700; /* Золотой */
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
       margin-bottom: 20px;
     }
 
     p {
-      font-size: 1.4em;
-      max-width: 600px;
-      line-height: 1.6;
-      margin-bottom: 30px;
-      color: #f5e6ca; /* Светлый беж */
+      font-size: 1.2em;
+      font-family: 'Arial', sans-serif;
+      color: #f5f5f5;
+      line-height: 1.8;
+      margin-bottom: 20px;
     }
 
     .button {
@@ -58,7 +66,7 @@
       font-size: 1.2em;
       font-weight: bold;
       color: white;
-      background: #5e35b1;
+      background: #3cba92;
       border: none;
       border-radius: 8px;
       text-decoration: none;
@@ -68,66 +76,102 @@
 
     .button:hover {
       transform: scale(1.1);
-      background: #4527a0;
+      background: #2a8a68;
     }
 
-    /* Прозрачная картинка */
+    /* Прозрачная PNG картинка */
     #main-image {
-      max-width: 300px;
+      max-width: 250px;
       height: auto;
       margin: 20px 0;
-      border-radius: 15px;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-      opacity: 0.8; /* Прозрачность */
-      transition: opacity 0.3s ease-in-out;
+      opacity: 0.9;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     }
 
     #main-image:hover {
-      opacity: 1; /* Полная непрозрачность при наведении */
+      transform: scale(1.1);
+      opacity: 1;
     }
 
-    /* Новая сложная анимация загрузки */
+    /* Анимация загрузки с ладонями */
     #loader {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle, #2e3b4e, #1c1f26);
       display: flex;
       justify-content: center;
       align-items: center;
+      background: linear-gradient(135deg, #243b55, #141e30);
       z-index: 10;
     }
 
-    #loader .sparkle {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #d4af37, transparent);
-      animation: sparkle 2s infinite ease-in-out;
+    #loader .hands {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      animation: handsOpen 3s ease-out forwards;
     }
 
-    @keyframes sparkle {
+    #loader .hand {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(to bottom, #d9a760, #91684a);
+      border-radius: 50% 50% 50% 50%;
+      transform-origin: center bottom;
+    }
+
+    #loader .hand.left {
+      left: 0;
+      transform: rotate(90deg);
+      animation: leftHandMove 3s ease-out forwards;
+    }
+
+    #loader .hand.right {
+      right: 0;
+      transform: rotate(-90deg);
+      animation: rightHandMove 3s ease-out forwards;
+    }
+
+    @keyframes leftHandMove {
       0% {
-        transform: scale(0.5) translate(0, 0);
-        opacity: 1;
-      }
-      50% {
-        transform: scale(1.5) translate(calc(var(--dx) * 300px), calc(var(--dy) * 300px));
-        opacity: 0.7;
+        transform: rotate(90deg);
       }
       100% {
-        transform: scale(0) translate(calc(var(--dx) * 600px), calc(var(--dy) * 600px));
+        transform: rotate(20deg);
+      }
+    }
+
+    @keyframes rightHandMove {
+      0% {
+        transform: rotate(-90deg);
+      }
+      100% {
+        transform: rotate(-20deg);
+      }
+    }
+
+    @keyframes handsOpen {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(0);
         opacity: 0;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Анимация загрузки -->
-  <div id="loader"></div>
+  <!-- Анимация загрузки с ладонями -->
+  <div id="loader">
+    <div class="hands">
+      <div class="hand left"></div>
+      <div class="hand right"></div>
+    </div>
+  </div>
 
   <!-- Холст для звезд -->
   <canvas id="starCanvas"></canvas>
@@ -141,27 +185,10 @@
   </div>
 
   <script>
-    // Анимация "магических искр" при загрузке
-    const loader = document.getElementById("loader");
-
-    function createSparkle() {
-      for (let i = 0; i < 30; i++) {
-        const sparkle = document.createElement("div");
-        sparkle.className = "sparkle";
-        sparkle.style.setProperty("--dx", Math.random() * 2 - 1); // От -1 до 1
-        sparkle.style.setProperty("--dy", Math.random() * 2 - 1); // От -1 до 1
-        sparkle.style.left = `${Math.random() * 100}%`;
-        sparkle.style.top = `${Math.random() * 100}%`;
-        loader.appendChild(sparkle);
-
-        setTimeout(() => sparkle.remove(), 2000); // Удаляем частицу через 2 секунды
-      }
-    }
-
+    // Ладони раскрываются и исчезают
     window.onload = function () {
-      createSparkle(); // Создаём магические искры
       setTimeout(() => {
-        loader.style.display = "none";
+        document.getElementById("loader").style.display = "none";
         document.getElementById("main-content").style.display = "flex";
       }, 3000); // Переход к контенту через 3 секунды
     };
