@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200">
   <defs>
     <!-- Градиент для обводки -->
     <linearGradient id="stroke-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -7,9 +7,9 @@
     </linearGradient>
   </defs>
 
-  <!-- Центрирование текста -->
-  <g text-anchor="middle" dominant-baseline="middle" transform="translate(300, 100)">
-    <!-- Буквы -->
+  <!-- Текст с центрированием -->
+  <g text-anchor="middle" transform="translate(300, 100)">
+    <!-- Анимация каждой буквы -->
     <text
       font-family="Cinzel, serif"
       font-size="60"
@@ -19,33 +19,32 @@
       stroke-width="2"
       letter-spacing="10"
     >
-      <!-- Анимация для каждой буквы -->
-      <tspan x="0" dy="0" opacity="0">
-        <animate attributeName="opacity" from="0" to="1" begin="0s" dur="0.5s" fill="freeze" />
+      <tspan x="-150" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" begin="0s" dur="1s" fill="freeze" />
         A
       </tspan>
-      <tspan x="40" dy="0" opacity="0">
-        <animate attributeName="opacity" from="0" to="1" begin="0.5s" dur="0.5s" fill="freeze" />
+      <tspan x="-90" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" begin="1s" dur="1s" fill="freeze" />
         S
       </tspan>
-      <tspan x="80" dy="0" opacity="0">
-        <animate attributeName="opacity" from="0" to="1" begin="1s" dur="0.5s" fill="freeze" />
+      <tspan x="-30" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" begin="2s" dur="1s" fill="freeze" />
         C
       </tspan>
-      <tspan x="120" dy="0" opacity="0">
-        <animate attributeName="opacity" from="0" to="1" begin="1.5s" dur="0.5s" fill="freeze" />
+      <tspan x="30" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" begin="3s" dur="1s" fill="freeze" />
         E
       </tspan>
-      <tspan x="160" dy="0" opacity="0">
-        <animate attributeName="opacity" from="0" to="1" begin="2s" dur="0.5s" fill="freeze" />
+      <tspan x="90" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" begin="4s" dur="1s" fill="freeze" />
         T
       </tspan>
-      <tspan x="200" dy="0" opacity="0">
-        <animate attributeName="opacity" from="0" to="1" begin="2.5s" dur="0.5s" fill="freeze" />
+      <tspan x="150" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" begin="5s" dur="1s" fill="freeze" />
         I
       </tspan>
-      <tspan x="240" dy="0" opacity="0">
-        <animate attributeName="opacity" from="0" to="1" begin="3s" dur="0.5s" fill="freeze" />
+      <tspan x="210" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" begin="6s" dur="1s" fill="freeze" />
         C
       </tspan>
     </text>
