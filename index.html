@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ритуал "Стакан воды"</title>
   <style>
-    /* Общий стиль для страницы */
+    /* Общий стиль */
     body {
       font-family: 'Georgia', serif;
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background: linear-gradient(135deg, #1c1f26, #28313b);
+      background: radial-gradient(circle, #1b2735, #090a0f);
       color: white;
     }
 
@@ -33,7 +33,7 @@
       align-items: center;
       text-align: center;
       height: 100vh;
-      display: none; /* Скрыто до окончания загрузки */
+      display: none; /* Скрыто до окончания SVG-анимации */
     }
 
     h1 {
@@ -82,21 +82,7 @@
       background: #2e8b57;
     }
 
-    /* Прозрачная PNG картинка */
-    #main-image {
-      max-width: 250px;
-      height: auto;
-      margin: 20px 0;
-      opacity: 0.9;
-      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    }
-
-    #main-image:hover {
-      transform: scale(1.1);
-      opacity: 1;
-    }
-
-    /* Загрузка */
+    /* SVG-анимация */
     #loader {
       position: fixed;
       top: 0;
@@ -106,35 +92,80 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(circle, #1c1f26, #28313b);
+      background: radial-gradient(circle, #1b2735, #090a0f);
       z-index: 10;
     }
 
-    /* Стили для SVG */
     svg {
-      width: 120px;
-      height: 120px;
+      width: 500px;
+      height: 150px;
+    }
+
+    text {
+      fill: url(#gradient);
+      font-family: 'Georgia', serif;
+      font-size: 50px;
+      font-weight: bold;
+      letter-spacing: 8px;
+      opacity: 0;
+      animation: fade-in 0.8s ease forwards;
+    }
+
+    text:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+
+    text:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+
+    text:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+
+    text:nth-child(4) {
+      animation-delay: 0.8s;
+    }
+
+    text:nth-child(5) {
+      animation-delay: 1s;
+    }
+
+    text:nth-child(6) {
+      animation-delay: 1.2s;
+    }
+
+    text:nth-child(7) {
+      animation-delay: 1.4s;
+    }
+
+    @keyframes fade-in {
+      to {
+        opacity: 1;
+      }
     }
   </style>
 </head>
 <body>
   <!-- Загрузка -->
   <div id="loader">
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0" y="0" viewBox="0 0 120 120" enable-background="new 0 0 120 120" xml:space="preserve">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 150">
+      <!-- Градиент для текста -->
       <defs>
-        <clipPath id="circle-clip">
-          <path class="clip" d="M101.807,123.37c10-0.352,18.193,5.401,18.193,5.401V0H0v128.771c0,0,9.701-5.227,17.069-5.227s10.464,6.314,20.877,6.314
-          c10.175,0,12.703-4.209,22.053-4.209s11.981,5.438,20.578,5.438S91.807,123.722,101.807,123.37z">
-          </path>
-        </clipPath>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color: #87CEEB; stop-opacity: 1" />
+          <stop offset="100%" style="stop-color: #FFD700; stop-opacity: 1" />
+        </linearGradient>
       </defs>
-      <g clip-path="url(#circle-clip)">
-        <path class="logo" d="M84.995 62.896h-5.788v3.061h5.788c1.037 0 1.68-0.611 1.68-1.512C86.675 63.582 86.032 62.896 84.995 62.896zM86.211 55.411c0-0.828-0.68-1.368-1.43-1.368h-5.574v2.808h5.574C85.531 56.85 86.211 56.274 86.211 55.411zM60 0C26.863 0 0 26.863 0 60c0 33.138 26.863 60 60 60 33.138 0 60-26.862 60-60C120 26.863 93.138 0 60 0zM48.974 72.004h-7.217v-9.178h-8.54v9.178H26V47.996h7.217v8.495h8.54v-8.495h7.217V72.004zM69.094 72.004H52.836V47.996h7.218v17.672h9.04V72.004zM86.962 72.004H71.99V47.996h14.471c4.931 0 7.075 3.312 7.075 6.119 0 2.987-1.752 5.003-4.074 5.507C92.035 60.018 94 62.393 94 65.488 94 68.836 91.749 72.004 86.962 72.004z"
-        />
-        <text x="50%" y="65%" text-anchor="middle" font-size="16" font-family="Arial" fill="#FFD700" font-weight="bold">
-          Ascetic
-        </text>
-      </g>
+
+      <!-- Текстовые элементы -->
+      <text x="10" y="100">A</text>
+      <text x="70" y="100">S</text>
+      <text x="130" y="100">C</text>
+      <text x="190" y="100">E</text>
+      <text x="250" y="100">T</text>
+      <text x="310" y="100">I</text>
+      <text x="370" y="100">C</text>
     </svg>
   </div>
 
@@ -145,7 +176,6 @@
   <div id="main-content">
     <h1>Ритуал</h1>
     <h2>"Стакан воды"</h2>
-    <img id="main-image" src="water-glass.png" alt="Стакан воды">
     <p>С помощью этого ритуала вы можете загадывать желания, заряжая воду своей энергией.</p>
     <a href="phases.html" class="button">Начать</a>
   </div>
