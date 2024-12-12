@@ -7,11 +7,11 @@
   <style>
     /* Общий стиль для страницы */
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background: linear-gradient(135deg, #2c3e50, #4ca1af);
+      background: linear-gradient(135deg, #1c2331, #4a69bd);
       color: white;
     }
 
@@ -37,99 +37,100 @@
     }
 
     h1 {
-      font-size: 3em;
-      margin: 0.5em 0;
+      font-size: 3.5em;
+      font-weight: bold;
+      color: #ffeb3b;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      margin-bottom: 20px;
     }
 
     p {
-      font-size: 1.2em;
-      margin: 1em 0;
+      font-size: 1.4em;
       max-width: 600px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      color: #fff3e0;
     }
 
     .button {
       display: inline-block;
-      margin: 20px;
-      padding: 10px 20px;
-      font-size: 18px;
-      border: none;
-      border-radius: 5px;
-      background-color: #673ab7;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      font-weight: bold;
       color: white;
-      cursor: pointer;
+      background: #ff5722;
+      border: none;
+      border-radius: 8px;
       text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
     }
 
     .button:hover {
-      background-color: #512da8;
+      transform: scale(1.1);
+      background: #e64a19;
     }
 
-    /* Стили для изображения */
+    /* Прозрачная картинка */
     #main-image {
       max-width: 300px;
       height: auto;
       margin: 20px 0;
       border-radius: 15px;
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+      opacity: 0.6; /* Прозрачность */
+      transition: opacity 0.3s ease-in-out; /* Плавный эффект при наведении */
     }
 
-    /* Анимация загрузки */
+    #main-image:hover {
+      opacity: 1; /* Полная непрозрачность при наведении */
+    }
+
+    /* Анимация взрыва */
     #loader {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, #2c3e50, #4ca1af);
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 10;
+      background: transparent;
     }
 
-    #loader .magic-circle {
+    #explosion {
       position: relative;
       width: 100px;
       height: 100px;
-      border-radius: 50%;
-      border: 5px solid transparent;
-      border-top: 5px solid white;
-      animation: rotate 1.5s linear infinite;
     }
 
-    #loader .magic-circle:before,
-    #loader .magic-circle:after {
-      content: '';
+    .particle {
       position: absolute;
-      inset: 5px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      border: 5px solid transparent;
-      border-top: 5px solid white;
-      animation: rotate 1.5s linear infinite;
+      background: radial-gradient(circle, #ffeb3b, #ffa726);
+      animation: explode 0.7s ease-out forwards;
     }
 
-    #loader .magic-circle:before {
-      animation-delay: 0.5s;
-    }
-
-    #loader .magic-circle:after {
-      animation-delay: 1s;
-    }
-
-    @keyframes rotate {
+    @keyframes explode {
       0% {
-        transform: rotate(0deg);
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
       }
       100% {
-        transform: rotate(360deg);
+        transform: translate(calc(var(--dx) * 200px), calc(var(--dy) * 200px)) scale(0.5);
+        opacity: 0;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Анимация загрузки -->
+  <!-- Анимация взрыва -->
   <div id="loader">
-    <div class="magic-circle"></div>
+    <div id="explosion"></div>
   </div>
 
   <!-- Холст для звезд -->
@@ -138,18 +139,33 @@
   <!-- Основной контент -->
   <div id="main-content">
     <h1>Ритуал "Стакан воды"</h1>
-    <img id="main-image" src="water-glass.png" alt="Стакан воды">
+    <img id="main-image" src="water-glass.jpg" alt="Стакан воды">
     <p>С помощью этого ритуала вы можете загадывать желания, заряжая воду своей энергией.</p>
     <a href="phases.html" class="button">Начать</a>
   </div>
 
   <script>
-    // Магическая загрузка
+    // Магическая загрузка с взрывом
+    const explosion = document.getElementById("explosion");
+
+    function createExplosion() {
+      for (let i = 0; i < 20; i++) {
+        const particle = document.createElement("div");
+        particle.className = "particle";
+        particle.style.setProperty("--dx", Math.random() * 2 - 1); // От -1 до 1
+        particle.style.setProperty("--dy", Math.random() * 2 - 1); // От -1 до 1
+        explosion.appendChild(particle);
+
+        setTimeout(() => particle.remove(), 700); // Удаляем частицу через 0.7 секунды
+      }
+    }
+
     window.onload = function () {
+      createExplosion(); // Создаём взрыв
       setTimeout(() => {
-        document.getElementById('loader').style.display = 'none';
-        document.getElementById('main-content').style.display = 'flex';
-      }, 3000); // Задержка загрузки 3 секунды
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("main-content").style.display = "flex";
+      }, 1000); // Переход к контенту через 1 секунду
     };
 
     // Звездная анимация
