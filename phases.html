@@ -22,6 +22,15 @@
       transform: scale(1);
     }
 
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
     #main-content {
       display: flex;
       flex-direction: column;
@@ -47,37 +56,106 @@
       max-width: 600px;
       text-align: center;
     }
+
+    .button {
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: white;
+      background: #32a852;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .button:hover {
+      transform: scale(1.1);
+      background: #2e8b57;
+    }
   </style>
 </head>
 <body>
+  <canvas id="starCanvas"></canvas>
+
   <div id="main-content">
     <h1>Фазы Луны</h1>
-    <p id="moon-phase">Загружаем ближайшие фазы Луны...</p>
+    <p id="moon-phase">Ближайшее новолуние и полнолуние:</p>
+    <ul id="moon-phases-list"></ul>
+    <a href="steps.html" class="button">Перейти к шагам ритуала</a>
   </div>
 
   <script>
-    // Алгоритм расчёта фаз Луны
+    // Анимация появления страницы
+    window.onload = function () {
+      document.body.classList.add("visible");
+    };
+
+    // Звёздная анимация
+    const canvas = document.getElementById('starCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let stars = [];
+    const numStars = 150;
+
+    function createStar() {
+      return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2,
+        alpha: Math.random(),
+        speed: Math.random() * 0.05,
+      };
+    }
+
+    for (let i = 0; i < numStars; i++) {
+      stars.push(createStar());
+    }
+
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      stars.forEach((star) => {
+        star.alpha += star.speed;
+        if (star.alpha > 1 || star.alpha < 0) {
+          star.speed = -star.speed;
+        }
+
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animateStars);
+    }
+
+    animateStars();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      stars = [];
+      for (let i = 0; i < numStars; i++) {
+        stars.push(createStar());
+      }
+    });
+
+    // Расчёт фаз Луны
     function calculateMoonPhases() {
       const today = new Date();
-      const year = today.getFullYear();
-
-      // Средняя продолжительность лунного цикла в днях
       const lunarCycle = 29.53058867;
-
-      // Дата новолуния (приблизительная, для расчёта)
-      const knownNewMoon = new Date(Date.UTC(2000, 0, 6, 18, 14)); // 6 января 2000 года
+      const knownNewMoon = new Date(Date.UTC(2000, 0, 6, 18, 14));
       const daysSinceKnownNewMoon = (today - knownNewMoon) / (1000 * 60 * 60 * 24);
-
-      // Количество прошедших лунных циклов
       const cyclesSinceKnownNewMoon = Math.floor(daysSinceKnownNewMoon / lunarCycle);
 
-      // Дата последнего новолуния
       const lastNewMoon = new Date(knownNewMoon.getTime() + cyclesSinceKnownNewMoon * lunarCycle * 24 * 60 * 60 * 1000);
-
-      // Ближайшее новолуние
       const nextNewMoon = new Date(lastNewMoon.getTime() + lunarCycle * 24 * 60 * 60 * 1000);
-
-      // Ближайшее полнолуние
       const nextFullMoon = new Date(lastNewMoon.getTime() + (lunarCycle / 2) * 24 * 60 * 60 * 1000);
 
       return {
@@ -89,18 +167,14 @@
     // Отображение фаз Луны
     function displayMoonPhases() {
       const phases = calculateMoonPhases();
-
-      document.getElementById("moon-phase").innerText = `
-        Ближайшее новолуние: ${phases.nextNewMoon}\n
-        Ближайшее полнолуние: ${phases.nextFullMoon}
+      const list = document.getElementById('moon-phases-list');
+      list.innerHTML = `
+        <li>Ближайшее новолуние: ${phases.nextNewMoon}</li>
+        <li>Ближайшее полнолуние: ${phases.nextFullMoon}</li>
       `;
     }
 
-    // Запуск
-    window.onload = function () {
-      document.body.classList.add("visible");
-      displayMoonPhases();
-    };
+    displayMoonPhases();
   </script>
 </body>
 </html>
