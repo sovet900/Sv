@@ -145,39 +145,47 @@
       }
     });
 
-    // Получение данных о фазах Луны через API
-    async function fetchMoonPhase() {
-      const apiUrl = 'https://moon-calendar.p.rapidapi.com/moon_phase';
-      const headers = {
-        'x-rapidapi-host': 'moon-calendar.p.rapidapi.com',
-        'x-rapidapi-key': 'f58a155da3msh7db24dde327a2a5p178f3ajsn2472e16d0e54',
-      };
-
-      try {
-        const response = await fetch(apiUrl, { headers });
-        const data = await response.json();
-
-        console.log('API Response:', data); // Логирование для отладки
-
-        if (response.ok) {
-          const nextNewMoon = data.closest.new_moon.date;
-          const nextFullMoon = data.closest.full_moon.date;
-
-          document.getElementById("moon-phase").innerText = `
-            Ближайшее новолуние: ${new Date(nextNewMoon).toLocaleDateString('ru-RU')}\n
-            Ближайшее полнолуние: ${new Date(nextFullMoon).toLocaleDateString('ru-RU')}
-          `;
-        } else {
-          document.getElementById("moon-phase").innerText = "Ошибка: не удалось загрузить данные.";
-          console.error('API Error:', data); // Логирование ошибок API
-        }
-      } catch (error) {
-        document.getElementById("moon-phase").innerText = "Ошибка подключения к API.";
-        console.error('Fetch Error:', error); // Логирование ошибок сети
+    // Функция для получения данных о фазах Луны
+    function load_moon_phases(obj, callback) {
+      const gets = [];
+      for (const i in obj) {
+        gets.push(i + "=" + encodeURIComponent(obj[i]));
       }
+      gets.push("LDZ=" + new Date(obj.year, obj.month - 1, 1).getTime() / 1000);
+      const xmlhttp = new XMLHttpRequest();
+      const url = "https://www.icalendar37.net/lunar/api/?" + gets.join("&");
+      xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+          callback(JSON.parse(xmlhttp.responseText));
+        }
+      };
+      xmlhttp.open("GET", url, true);
+      xmlhttp.send();
     }
 
-    fetchMoonPhase();
+    // Использование функции
+    load_moon_phases(
+      { year: new Date().getFullYear(), month: new Date().getMonth() + 1 },
+      function (data) {
+        const phases = data.phase;
+        let nextNewMoon = "";
+        let nextFullMoon = "";
+
+        for (const key in phases) {
+          if (phases[key].isNewMoon) {
+            nextNewMoon = phases[key].date;
+          }
+          if (phases[key].isFullMoon) {
+            nextFullMoon = phases[key].date;
+          }
+        }
+
+        document.getElementById("moon-phase").innerText = `
+          Ближайшее новолуние: ${nextNewMoon}\n
+          Ближайшее полнолуние: ${nextFullMoon}
+        `;
+      }
+    );
   </script>
 </body>
 </html>
