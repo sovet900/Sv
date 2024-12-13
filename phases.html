@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Фазы Луны</title>
   <style>
-    /* Общий стиль для страницы */
     body {
       font-family: 'Helvetica Neue', Arial, sans-serif;
       margin: 0;
@@ -13,9 +12,16 @@
       overflow: hidden;
       background: radial-gradient(circle, #1b2735, #090a0f);
       color: white;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
     }
 
-    /* Холст для звезд */
+    body.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
     canvas {
       position: fixed;
       top: 0;
@@ -25,7 +31,6 @@
       z-index: -1;
     }
 
-    /* Основной контент */
     #main-content {
       display: flex;
       flex-direction: column;
@@ -33,20 +38,12 @@
       align-items: center;
       text-align: center;
       height: 100vh;
-      opacity: 0; /* Скрыт до появления */
-      transform: scale(0.9); /* Уменьшен до появления */
-      transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out; /* Анимация */
-    }
-
-    #main-content.visible {
-      opacity: 1;
-      transform: scale(1);
     }
 
     h1 {
       font-size: 3em;
       font-weight: bold;
-      color: #ffdd00; /* Золотой */
+      color: #ffdd00;
       text-shadow: 0 0 10px rgba(255, 223, 0, 0.8), 0 0 20px rgba(255, 223, 0, 0.6);
       margin-bottom: 20px;
     }
@@ -78,37 +75,11 @@
       transform: scale(1.1);
       background: #2e8b57;
     }
-
-    /* SVG-анимация */
-    #loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: radial-gradient(circle, #1b2735, #090a0f);
-      z-index: 10;
-    }
-
-    #loader object {
-      width: 300px;
-      height: 100px;
-    }
   </style>
 </head>
 <body>
-  <!-- Загрузка -->
-  <div id="loader">
-    <object data="loader.svg" type="image/svg+xml"></object>
-  </div>
-
-  <!-- Холст для звезд -->
   <canvas id="starCanvas"></canvas>
 
-  <!-- Основной контент -->
   <div id="main-content">
     <h1>Фазы Луны</h1>
     <p id="moon-phase">Загружаем данные о фазах Луны...</p>
@@ -116,17 +87,12 @@
   </div>
 
   <script>
-    // Убираем загрузку и показываем контент
+    // Анимация появления страницы
     window.onload = function () {
-      setTimeout(() => {
-        document.getElementById("loader").style.display = "none"; // Скрываем SVG
-        const mainContent = document.getElementById("main-content");
-        mainContent.style.display = "flex"; // Показываем основной контент
-        setTimeout(() => mainContent.classList.add("visible"), 500);
-      }, 2000); // Время загрузки
+      document.body.classList.add("visible");
     };
 
-    // Звездная анимация
+    // Звёздная анимация
     const canvas = document.getElementById('starCanvas');
     const ctx = canvas.getContext('2d');
 
@@ -179,15 +145,30 @@
       }
     });
 
-    // Получение данных о фазах Луны (пример с использованием API)
+    // Получение данных о фазах Луны через API
     async function fetchMoonPhase() {
+      const apiKey = "YOUR_API_KEY"; // Вставьте ваш ключ API
+      const apiUrl = `https://api.qweather.com/v7/astronomy/moon?key=${apiKey}&location=101010100`;
+
       try {
-        const response = await fetch("https://api.farmsense.net/v1/moonphases/?d=20231211"); // Замените на ваше API
+        const response = await fetch(apiUrl);
         const data = await response.json();
-        const nextFullMoon = data.find(phase => phase.Phase === "Full Moon");
-        document.getElementById("moon-phase").innerText = `Ближайшее полнолуние: ${nextFullMoon.Date}`;
+
+        if (data.code === "200") {
+          const phase = data.moonPhase;
+          const rise = data.moonrise.time;
+          const set = data.moonset.time;
+
+          document.getElementById("moon-phase").innerText = `
+            Фаза Луны: ${phase}\n
+            Восход: ${rise}\n
+            Закат: ${set}
+          `;
+        } else {
+          document.getElementById("moon-phase").innerText = "Ошибка: не удалось загрузить данные.";
+        }
       } catch (error) {
-        document.getElementById("moon-phase").innerText = "Не удалось загрузить данные о фазах Луны.";
+        document.getElementById("moon-phase").innerText = "Ошибка подключения к API.";
       }
     }
 
