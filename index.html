@@ -27,19 +27,36 @@
     }
 
     svg {
-      width: 300px; /* Подберите оптимальный размер */
+      width: 300px; /* Увеличенный размер SVG */
       height: auto;
+    }
+
+    /* Анимация круга */
+    circle {
+      animation: rotate 2s linear infinite;
+      stroke-opacity: 0.6; /* Прозрачный круг */
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
     }
   </style>
 </head>
 <body>
   <!-- Загрузка через встроенный SVG -->
   <div id="loader">
-    <!-- Вставьте содержимое вашего loader.svg сюда -->
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
-      <!-- Ваш SVG-контент -->
-      <circle cx="250" cy="250" r="200" stroke="#ffdd00" stroke-width="10" fill="none" />
-      <text x="50%" y="50%" text-anchor="middle" fill="#ffdd00" dy=".3em" font-size="24">ASCETICS</text>
+      <!-- Круг -->
+      <circle cx="250" cy="250" r="200" stroke="#32a852" stroke-width="10" fill="none" />
+      <!-- Текст -->
+      <text x="50%" y="50%" text-anchor="middle" fill="#32a852" dy=".3em" font-size="36" font-family="Arial, sans-serif">
+        ASCETICS
+      </text>
     </svg>
   </div>
 
