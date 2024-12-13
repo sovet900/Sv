@@ -5,8 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ритуал "Стакан воды"</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Стили для загрузки */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle, #1b2735, #090a0f);
+      z-index: 10;
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    #loader object {
+      width: 200px;
+      height: 200px;
+    }
+  </style>
 </head>
 <body>
+  <!-- Загрузка через SVG -->
+  <div id="loader">
+    <object data="loader.svg" type="image/svg+xml"></object>
+  </div>
+
   <!-- Холст для звезд -->
   <div id="starCanvas"></div>
 
@@ -17,5 +48,18 @@
     <p>С помощью этого ритуала вы можете загадывать желания, заряжая воду своей энергией.</p>
     <a href="phases.html" class="button">Начать</a>
   </div>
+
+  <script>
+    // Убираем загрузку после завершения анимации
+    window.onload = function () {
+      const loader = document.getElementById("loader");
+      const mainContent = document.getElementById("main-content");
+
+      setTimeout(() => {
+        loader.classList.add("hidden"); // Скрываем SVG
+        mainContent.style.display = "flex"; // Показываем основной контент
+      }, 2000); // Время загрузки SVG (2 секунды)
+    };
+  </script>
 </body>
 </html>
