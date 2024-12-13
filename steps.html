@@ -1,74 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Шаги ритуала "Стакан воды"</title>
+  <title>Шаги ритуала</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: radial-gradient(circle, #1b2735, #090a0f);
+      color: white;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+    }
+
+    body.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    #main-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      margin: 20px;
-      background-color: #f4f4f9;
+      height: 100vh;
     }
+
     h1 {
-      color: #4CAF50;
+      font-size: 3em;
+      font-weight: bold;
+      color: #ffdd00;
+      text-shadow: 0 0 10px rgba(255, 223, 0, 0.8), 0 0 20px rgba(255, 223, 0, 0.6);
+      margin-bottom: 20px;
     }
-    .step {
+
+    ul {
+      list-style: none;
+      padding: 0;
       margin: 20px 0;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      background-color: #e8f5e9;
+      text-align: left;
+      max-width: 600px;
     }
-    .step h2 {
-      margin-bottom: 10px;
-      color: #388E3C;
-    }
-    .step img {
-      max-width: 80%;
-      height: auto;
+
+    li {
+      font-size: 1.2em;
+      color: #f5f5dc;
       margin: 10px 0;
-      border-radius: 10px;
+      line-height: 1.6;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
     }
+
     .button {
       display: inline-block;
-      margin: 20px;
-      padding: 10px 20px;
-      font-size: 18px;
-      border: none;
-      border-radius: 5px;
-      background-color: #388E3C;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      font-weight: bold;
       color: white;
-      cursor: pointer;
+      background: #32a852;
+      border: none;
+      border-radius: 8px;
       text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
     }
+
     .button:hover {
-      background-color: #2E7D32;
+      transform: scale(1.1);
+      background: #2e8b57;
     }
   </style>
 </head>
 <body>
-  <h1>Шаги ритуала "Стакан воды"</h1>
+  <canvas id="starCanvas"></canvas>
 
-  <div class="step">
-    <h2>Шаг 1: Подготовка</h2>
-    <p>Налейте стакан чистой воды и поставьте его перед собой. Важно, чтобы вода была свежей.</p>
-    <img src="step1.jpg" alt="Шаг 1: Налейте воду">
+  <div id="main-content">
+    <h1>Шаги ритуала</h1>
+    <ul>
+      <li>1. Возьмите чистый стакан воды.</li>
+      <li>2. Сосредоточьтесь на своём желании.</li>
+      <li>3. Проговорите желание вслух, направляя энергию в воду.</li>
+      <li>4. Выпейте воду, представляя исполнение желания.</li>
+      <li>5. Повторяйте ритуал при необходимости.</li>
+    </ul>
+    <a href="phases.html" class="button">Перейти к фазам Луны</a>
   </div>
 
-  <div class="step">
-    <h2>Шаг 2: Формулировка желания</h2>
-    <p>Закройте глаза и подумайте о своём желании. Представьте, что оно уже исполнилось. Направьте свои мысли на стакан воды.</p>
-    <img src="step2.jpg" alt="Шаг 2: Формулировка желания">
-  </div>
+  <script>
+    // Анимация появления страницы
+    window.onload = function () {
+      document.body.classList.add("visible");
+    };
 
-  <div class="step">
-    <h2>Шаг 3: Выполнение ритуала</h2>
-    <p>Откройте глаза, улыбнитесь и медленно выпейте воду. Представьте, что ваше желание начинает сбываться.</p>
-    <img src="step3.jpg" alt="Шаг 3: Выполнение ритуала">
-  </div>
+    // Звёздная анимация
+    const canvas = document.getElementById('starCanvas');
+    const ctx = canvas.getContext('2d');
 
-  <a href="index.html" class="button">Вернуться на главную</a>
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let stars = [];
+    const numStars = 150;
+
+    function createStar() {
+      return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2,
+        alpha: Math.random(),
+        speed: Math.random() * 0.05,
+      };
+    }
+
+    for (let i = 0; i < numStars; i++) {
+      stars.push(createStar());
+    }
+
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      stars.forEach((star) => {
+        star.alpha += star.speed;
+        if (star.alpha > 1 || star.alpha < 0) {
+          star.speed = -star.speed;
+        }
+
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animateStars);
+    }
+
+    animateStars();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      stars = [];
+      for (let i = 0; i < numStars; i++) {
+        stars.push(createStar());
+      }
+    });
+  </script>
 </body>
 </html>
