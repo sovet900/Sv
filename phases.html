@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -147,22 +147,19 @@
 
     // Получение данных о фазах Луны через API
     async function fetchMoonPhase() {
-      const apiKey = "YOUR_API_KEY"; // Вставьте ваш ключ API
-      const apiUrl = `https://api.qweather.com/v7/astronomy/moon?key=${apiKey}&location=101010100`;
+      const apiUrl = 'https://api.moon-api.com/v1/phase';
 
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();
 
-        if (data.code === "200") {
-          const phase = data.moonPhase;
-          const rise = data.moonrise.time;
-          const set = data.moonset.time;
+        if (response.ok) {
+          const { phase, next_new_moon, next_full_moon } = data;
 
           document.getElementById("moon-phase").innerText = `
-            Фаза Луны: ${phase}\n
-            Восход: ${rise}\n
-            Закат: ${set}
+            Текущая фаза Луны: ${phase}\n
+            Ближайшее новолуние: ${new Date(next_new_moon).toLocaleDateString('ru-RU')}\n
+            Ближайшее полнолуние: ${new Date(next_full_moon).toLocaleDateString('ru-RU')}
           `;
         } else {
           document.getElementById("moon-phase").innerText = "Ошибка: не удалось загрузить данные.";
