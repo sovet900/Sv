@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Шаги ритуала</title>
+  <title>Ритуал "Стакан воды"</title>
   <style>
     body {
       font-family: 'Helvetica Neue', Arial, sans-serif;
       margin: 0;
-      padding: 0;
+      padding: 20px;
       overflow: hidden;
       background: radial-gradient(circle, #1b2735, #090a0f);
       color: white;
@@ -22,22 +22,10 @@
       transform: scale(1);
     }
 
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-
     #main-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      height: 100vh;
+      max-width: 800px;
+      margin: auto;
+      text-align: left;
     }
 
     h1 {
@@ -46,22 +34,36 @@
       color: #ffdd00;
       text-shadow: 0 0 10px rgba(255, 223, 0, 0.8), 0 0 20px rgba(255, 223, 0, 0.6);
       margin-bottom: 20px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 2em;
+      font-weight: bold;
+      color: #87ceeb;
+      margin-bottom: 15px;
+    }
+
+    p, li {
+      font-size: 1.2em;
+      color: #f5f5dc;
+      line-height: 1.8;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+      margin-bottom: 15px;
     }
 
     ul {
-      list-style: none;
+      list-style-type: none;
       padding: 0;
       margin: 20px 0;
-      text-align: left;
-      max-width: 600px;
     }
 
     li {
-      font-size: 1.2em;
-      color: #f5f5dc;
-      margin: 10px 0;
-      line-height: 1.6;
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+      margin-bottom: 10px;
+    }
+
+    .recommendations {
+      margin-top: 30px;
     }
 
     .button {
@@ -76,6 +78,8 @@
       text-decoration: none;
       cursor: pointer;
       transition: transform 0.3s ease, background 0.3s ease;
+      margin-top: 20px;
+      text-align: center;
     }
 
     .button:hover {
@@ -85,18 +89,59 @@
   </style>
 </head>
 <body>
-  <canvas id="starCanvas"></canvas>
-
   <div id="main-content">
-    <h1>Шаги ритуала</h1>
+    <h1>Ритуал "Стакан воды"</h1>
+    <p>
+      Ритуал «Стакан воды» помогает воплотить желания, используя силу подсознания и энергию воды. 
+      Этот метод, популяризированный Вадимом Зеландом, включает следующие шаги:
+    </p>
+    
+    <h2>1. Подготовка:</h2>
     <ul>
-      <li>1. Возьмите чистый стакан воды.</li>
-      <li>2. Сосредоточьтесь на своём желании.</li>
-      <li>3. Проговорите желание вслух, направляя энергию в воду.</li>
-      <li>4. Выпейте воду, представляя исполнение желания.</li>
-      <li>5. Повторяйте ритуал при необходимости.</li>
+      <li>Возьмите чистый лист бумаги и ручку.</li>
+      <li>Сформулируйте своё желание в утвердительной форме, как будто оно уже исполнилось. Например: 
+        <i>«Я успешно создал свой бизнес план и воплотил его в жизнь».</i></li>
+      <li>Запишите своё желание на бумаге.</li>
     </ul>
-    <a href="phases.html" class="button">Перейти к фазам Луны</a>
+
+    <h2>2. Зарядка воды:</h2>
+    <ul>
+      <li>Налейте в прозрачный стакан чистую питьевую воду.</li>
+      <li>Потрите ладони друг о друга, чтобы активировать энергетический поток.</li>
+      <li>Держа ладони по бокам стакана (не касаясь его), сосредоточьтесь на своём желании, представляя, что оно уже реализовано.</li>
+      <li>Представьте, как энергия вашего намерения передаётся воде.</li>
+    </ul>
+
+    <h2>3. Закрепление намерения:</h2>
+    <ul>
+      <li>Поставьте стакан на записанный лист с желанием.</li>
+      <li>Оставьте его на ночь, позволяя воде впитать энергию вашего намерения.</li>
+    </ul>
+
+    <h2>4. Завершение ритуала:</h2>
+    <ul>
+      <li>Утром, сразу после пробуждения, возьмите стакан с водой.</li>
+      <li>Сконцентрируйтесь на своём желании, ещё раз представив его исполненным.</li>
+      <li>Медленно выпейте воду, ощущая, как энергия желания наполняет вас.</li>
+    </ul>
+
+    <div class="recommendations">
+      <h2>Рекомендации:</h2>
+      <p>
+        <strong>Чистота воды:</strong> Используйте родниковую, талую или бутилированную воду. 
+        Кипячёная вода считается «мертвой» и не подходит для ритуала.
+      </p>
+      <p>
+        <strong>Формулировка желания:</strong> Избегайте отрицательных частиц. 
+        Вместо «Я не болею» пишите «Я полностью здоров».
+      </p>
+      <p>
+        <strong>Визуализация:</strong> Чётко представляйте исполнение желания и испытывайте 
+        связанные с этим положительные эмоции.
+      </p>
+    </div>
+
+    <a href="phases.html" class="button">Назад к фазам Луны</a>
   </div>
 
   <script>
@@ -104,59 +149,6 @@
     window.onload = function () {
       document.body.classList.add("visible");
     };
-
-    // Звёздная анимация
-    const canvas = document.getElementById('starCanvas');
-    const ctx = canvas.getContext('2d');
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let stars = [];
-    const numStars = 150;
-
-    function createStar() {
-      return {
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 2,
-        alpha: Math.random(),
-        speed: Math.random() * 0.05,
-      };
-    }
-
-    for (let i = 0; i < numStars; i++) {
-      stars.push(createStar());
-    }
-
-    function animateStars() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      stars.forEach((star) => {
-        star.alpha += star.speed;
-        if (star.alpha > 1 || star.alpha < 0) {
-          star.speed = -star.speed;
-        }
-
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
-        ctx.fill();
-      });
-
-      requestAnimationFrame(animateStars);
-    }
-
-    animateStars();
-
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      stars = [];
-      for (let i = 0; i < numStars; i++) {
-        stars.push(createStar());
-      }
-    });
   </script>
 </body>
 </html>
