@@ -57,6 +57,14 @@
       text-align: center;
     }
 
+    img {
+      max-width: 80%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+
     .button {
       display: inline-block;
       padding: 15px 30px;
@@ -82,6 +90,7 @@
 
   <div id="main-content">
     <h1>Фазы Луны</h1>
+    <img id="moon-image" src="" alt="Фаза Луны">
     <p id="moon-phase">Загружаем данные о фазах Луны...</p>
     <a href="index.html" class="button">Вернуться назад</a>
   </div>
@@ -145,47 +154,50 @@
       }
     });
 
-    // Функция для получения данных о фазах Луны
-    function load_moon_phases(obj, callback) {
-      const gets = [];
-      for (const i in obj) {
-        gets.push(i + "=" + encodeURIComponent(obj[i]));
+    // Данные для API
+    const apiData = {
+      format: "png",
+      style: {
+        moonStyle: "sketch",
+        backgroundStyle: "stars",
+        backgroundColor: "red",
+        headingColor: "white",
+        textColor: "red"
+      },
+      observer: {
+        latitude: 6.56774,
+        longitude: 79.88956,
+        date: new Date().toISOString().split("T")[0]
+      },
+      view: {
+        type: "portrait-simple",
+        orientation: "south-up"
       }
-      gets.push("LDZ=" + new Date(obj.year, obj.month - 1, 1).getTime() / 1000);
-      const xmlhttp = new XMLHttpRequest();
-      const url = "https://www.icalendar37.net/lunar/api/?" + gets.join("&");
-      xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-          callback(JSON.parse(xmlhttp.responseText));
-        }
-      };
-      xmlhttp.open("GET", url, true);
-      xmlhttp.send();
+    };
+
+    // Получение данных изображения Луны
+    async function fetchMoonImage() {
+      const apiUrl = "https://widgets.astronomyapi.com/moon-phase/generated/";
+      try {
+        const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(apiData)
+        });
+        const data = await response.json();
+
+        // Установка изображения Луны
+        document.getElementById("moon-image").src = data.data.imageUrl;
+        document.getElementById("moon-phase").innerText = "Фаза Луны загружена!";
+      } catch (error) {
+        console.error("Ошибка загрузки изображения Луны:", error);
+        document.getElementById("moon-phase").innerText = "Ошибка загрузки данных.";
+      }
     }
 
-    // Использование функции
-    load_moon_phases(
-      { year: new Date().getFullYear(), month: new Date().getMonth() + 1 },
-      function (data) {
-        const phases = data.phase;
-        let nextNewMoon = "";
-        let nextFullMoon = "";
-
-        for (const key in phases) {
-          if (phases[key].isNewMoon) {
-            nextNewMoon = phases[key].date;
-          }
-          if (phases[key].isFullMoon) {
-            nextFullMoon = phases[key].date;
-          }
-        }
-
-        document.getElementById("moon-phase").innerText = `
-          Ближайшее новолуние: ${nextNewMoon}\n
-          Ближайшее полнолуние: ${nextFullMoon}
-        `;
-      }
-    );
+    fetchMoonImage();
   </script>
 </body>
 </html>
