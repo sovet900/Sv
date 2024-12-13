@@ -8,17 +8,32 @@
     body {
       font-family: 'Helvetica Neue', Arial, sans-serif;
       margin: 0;
-      padding: 0;
+      padding: 20px;
+      overflow: hidden;
       background: radial-gradient(circle, #1b2735, #090a0f);
       color: white;
-      overflow-y: auto; /* Добавляем прокрутку */
-      height: 100%; /* Устанавливаем высоту для прокрутки */
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+    }
+
+    body.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
 
     #main-content {
       max-width: 800px;
-      margin: 20px auto;
-      padding: 20px;
+      margin: auto;
       text-align: left;
     }
 
@@ -83,6 +98,7 @@
   </style>
 </head>
 <body>
+  <canvas id="starCanvas"></canvas>
   <div id="main-content">
     <h1>Ритуал "Стакан воды"</h1>
     <p>
@@ -119,8 +135,17 @@
       <li>Медленно выпейте воду, ощущая, как энергия желания наполняет вас.</li>
     </ul>
 
+    <h2>5. Заключительный шаг:</h2>
+    <p>Лист с записанным желанием можно сжечь после завершения ритуала, чтобы символически закрепить ваше намерение.</p>
+
+    <h2>Дополнительные рекомендации:</h2>
+    <ul>
+      <li>На <strong>новолуние</strong> пишите желания, связанные с прибыванием. Например: <i>«Я хочу, чтобы моя зарплата увеличилась до 300 тысяч».</i></li>
+      <li>На <strong>полнолуние</strong> пишите желания, связанные с убыванием. Например: <i>«Я хочу, чтобы мой отец меньше болел».</i></li>
+    </ul>
+
     <div class="recommendations">
-      <h2>Рекомендации:</h2>
+      <h2>Общие рекомендации:</h2>
       <p>
         <strong>Чистота воды:</strong> Используйте родниковую, талую или бутилированную воду. 
         Кипячёная вода считается «мертвой» и не подходит для ритуала.
@@ -143,6 +168,59 @@
     window.onload = function () {
       document.body.classList.add("visible");
     };
+
+    // Звёздная анимация
+    const canvas = document.getElementById('starCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let stars = [];
+    const numStars = 150;
+
+    function createStar() {
+      return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2,
+        alpha: Math.random(),
+        speed: Math.random() * 0.05,
+      };
+    }
+
+    for (let i = 0; i < numStars; i++) {
+      stars.push(createStar());
+    }
+
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      stars.forEach((star) => {
+        star.alpha += star.speed;
+        if (star.alpha > 1 || star.alpha < 0) {
+          star.speed = -star.speed;
+        }
+
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animateStars);
+    }
+
+    animateStars();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      stars = [];
+      for (let i = 0; i < numStars; i++) {
+        stars.push(createStar());
+      }
+    });
   </script>
 </body>
 </html>
