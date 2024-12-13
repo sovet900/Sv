@@ -45,22 +45,26 @@
       opacity: 1;
     }
 
-    /* Эффект плавного появления */
-    #main-content {
+    /* Эффект плавного появления страницы */
+    body {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 1.5s ease, transform 1.5s ease;
+      transform: scale(0.9);
+      transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+    }
+
+    body.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Основной контент */
+    #main-content {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       height: 100vh;
-    }
-
-    #main-content.visible {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     h1 {
@@ -145,62 +149,10 @@
     window.onload = function () {
       const loader = document.getElementById("loader");
       const mainContent = document.getElementById("main-content");
-      const starCanvas = document.getElementById("starCanvas");
-
-      // Анимация звездного неба
-      const ctx = starCanvas.getContext('2d');
-      starCanvas.width = window.innerWidth;
-      starCanvas.height = window.innerHeight;
-
-      let stars = [];
-      const numStars = 150;
-
-      function createStar() {
-        return {
-          x: Math.random() * starCanvas.width,
-          y: Math.random() * starCanvas.height,
-          radius: Math.random() * 2,
-          alpha: Math.random(),
-          speed: Math.random() * 0.05,
-        };
-      }
-
-      for (let i = 0; i < numStars; i++) {
-        stars.push(createStar());
-      }
-
-      function animateStars() {
-        ctx.clearRect(0, 0, starCanvas.width, starCanvas.height);
-
-        stars.forEach((star) => {
-          star.alpha += star.speed;
-          if (star.alpha > 1 || star.alpha < 0) {
-            star.speed = -star.speed;
-          }
-
-          ctx.beginPath();
-          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
-          ctx.fill();
-        });
-
-        requestAnimationFrame(animateStars);
-      }
-
-      animateStars();
-
-      window.addEventListener('resize", () => {
-        starCanvas.width = window.innerWidth;
-        starCanvas.height = window.innerHeight;
-        stars = [];
-        for (let i = 0; i < numStars; i++) {
-          stars.push(createStar());
-        }
-      });
 
       setTimeout(() => {
         loader.classList.add("hidden"); // Скрываем SVG
-        mainContent.classList.add("visible"); // Показываем контент с эффектом появления
+        document.body.classList.add("visible"); // Плавное появление страницы
       }, 1900); // Время загрузки SVG (1.9 секунды)
     };
   </script>
