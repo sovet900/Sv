@@ -27,8 +27,18 @@
     }
 
     svg {
-      width: 400px;
+      width: 500px; /* Увеличенный размер SVG */
       height: auto;
+    }
+
+    /* Стили для звезд */
+    #starCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
 
     /* Стили для картинки */
@@ -55,16 +65,6 @@
           <stop offset="0%" stop-color="#FFFFFF" />
           <stop offset="100%" stop-color="#D3D3D3" />
         </linearGradient>
-        <linearGradient id="glow-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="rgba(255, 255, 255, 0)" />
-          <stop offset="50%" stop-color="rgba(255, 255, 255, 0.7)" />
-          <stop offset="100%" stop-color="rgba(255, 255, 255, 0)" />
-          <animate attributeName="x1" from="0%" to="100%" dur="2s" repeatCount="indefinite" />
-          <animate attributeName="x2" from="100%" to="200%" dur="2s" repeatCount="indefinite" />
-        </linearGradient>
-        <mask id="glow-mask">
-          <rect width="100%" height="100%" fill="url(#glow-gradient)" />
-        </mask>
       </defs>
       <text
         font-family="Helvetica Neue, Arial, sans-serif"
@@ -75,7 +75,6 @@
         dominant-baseline="middle"
         x="50%"
         y="50%"
-        mask="url(#glow-mask)"
       >
         ASCETICS
       </text>
@@ -83,7 +82,7 @@
   </div>
 
   <!-- Холст для звезд -->
-  <div id="starCanvas"></div>
+  <canvas id="starCanvas"></canvas>
 
   <!-- Основной контент -->
   <div id="main-content">
@@ -100,6 +99,58 @@
     window.onload = function () {
       const loader = document.getElementById("loader");
       const mainContent = document.getElementById("main-content");
+      const starCanvas = document.getElementById("starCanvas");
+
+      // Анимация звездного неба
+      const ctx = starCanvas.getContext('2d');
+      starCanvas.width = window.innerWidth;
+      starCanvas.height = window.innerHeight;
+
+      let stars = [];
+      const numStars = 150;
+
+      function createStar() {
+        return {
+          x: Math.random() * starCanvas.width,
+          y: Math.random() * starCanvas.height,
+          radius: Math.random() * 2,
+          alpha: Math.random(),
+          speed: Math.random() * 0.05,
+        };
+      }
+
+      for (let i = 0; i < numStars; i++) {
+        stars.push(createStar());
+      }
+
+      function animateStars() {
+        ctx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+
+        stars.forEach((star) => {
+          star.alpha += star.speed;
+          if (star.alpha > 1 || star.alpha < 0) {
+            star.speed = -star.speed;
+          }
+
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+          ctx.fill();
+        });
+
+        requestAnimationFrame(animateStars);
+      }
+
+      animateStars();
+
+      window.addEventListener('resize', () => {
+        starCanvas.width = window.innerWidth;
+        starCanvas.height = window.innerHeight;
+        stars = [];
+        for (let i = 0; i < numStars; i++) {
+          stars.push(createStar());
+        }
+      });
 
       setTimeout(() => {
         loader.classList.add("hidden"); // Скрываем SVG
