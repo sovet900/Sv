@@ -147,15 +147,17 @@
 
     // Получение данных о фазах Луны через API
     async function fetchMoonPhase() {
-      const apiUrl = 'https://moon-phase.p.rapidapi.com/advanced?lat=51.4768&lon=-0.0004';
+      const apiUrl = 'https://moon-calendar.p.rapidapi.com/moon_phase';
       const headers = {
-        'x-rapidapi-host': 'moon-phase.p.rapidapi.com',
+        'x-rapidapi-host': 'moon-calendar.p.rapidapi.com',
         'x-rapidapi-key': 'f58a155da3msh7db24dde327a2a5p178f3ajsn2472e16d0e54',
       };
 
       try {
         const response = await fetch(apiUrl, { headers });
         const data = await response.json();
+
+        console.log('API Response:', data); // Логирование для отладки
 
         if (response.ok) {
           const nextNewMoon = data.closest.new_moon.date;
@@ -167,9 +169,11 @@
           `;
         } else {
           document.getElementById("moon-phase").innerText = "Ошибка: не удалось загрузить данные.";
+          console.error('API Error:', data); // Логирование ошибок API
         }
       } catch (error) {
         document.getElementById("moon-phase").innerText = "Ошибка подключения к API.";
+        console.error('Fetch Error:', error); // Логирование ошибок сети
       }
     }
 
