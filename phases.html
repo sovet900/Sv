@@ -147,19 +147,23 @@
 
     // Получение данных о фазах Луны через API
     async function fetchMoonPhase() {
-      const apiUrl = 'https://api.moon-api.com/v1/phase';
+      const apiUrl = 'https://moon-phase.p.rapidapi.com/advanced?lat=51.4768&lon=-0.0004';
+      const headers = {
+        'x-rapidapi-host': 'moon-phase.p.rapidapi.com',
+        'x-rapidapi-key': 'f58a155da3msh7db24dde327a2a5p178f3ajsn2472e16d0e54',
+      };
 
       try {
-        const response = await fetch(apiUrl);
+        const response = await fetch(apiUrl, { headers });
         const data = await response.json();
 
         if (response.ok) {
-          const { phase, next_new_moon, next_full_moon } = data;
+          const nextNewMoon = data.closest.new_moon.date;
+          const nextFullMoon = data.closest.full_moon.date;
 
           document.getElementById("moon-phase").innerText = `
-            Текущая фаза Луны: ${phase}\n
-            Ближайшее новолуние: ${new Date(next_new_moon).toLocaleDateString('ru-RU')}\n
-            Ближайшее полнолуние: ${new Date(next_full_moon).toLocaleDateString('ru-RU')}
+            Ближайшее новолуние: ${new Date(nextNewMoon).toLocaleDateString('ru-RU')}\n
+            Ближайшее полнолуние: ${new Date(nextFullMoon).toLocaleDateString('ru-RU')}
           `;
         } else {
           document.getElementById("moon-phase").innerText = "Ошибка: не удалось загрузить данные.";
