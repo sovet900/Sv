@@ -8,23 +8,17 @@
     body {
       font-family: 'Helvetica Neue', Arial, sans-serif;
       margin: 0;
-      padding: 20px;
-      overflow: hidden;
+      padding: 0;
       background: radial-gradient(circle, #1b2735, #090a0f);
       color: white;
-      opacity: 0;
-      transform: scale(0.9);
-      transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
-    }
-
-    body.visible {
-      opacity: 1;
-      transform: scale(1);
+      overflow-y: auto; /* Добавляем прокрутку */
+      height: 100%; /* Устанавливаем высоту для прокрутки */
     }
 
     #main-content {
       max-width: 800px;
-      margin: auto;
+      margin: 20px auto;
+      padding: 20px;
       text-align: left;
     }
 
