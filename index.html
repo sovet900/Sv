@@ -33,7 +33,14 @@
       align-items: center;
       text-align: center;
       height: 100vh;
-      display: none; /* Скрыто до окончания SVG-анимации */
+      opacity: 0; /* Скрыт до появления */
+      transform: scale(0.9); /* Уменьшен до появления */
+      transition: opacity 1s ease-in-out, transform 1s ease-in-out; /* Анимация появления */
+    }
+
+    #main-content.visible {
+      opacity: 1; /* Появление */
+      transform: scale(1); /* Увеличение до нормального размера */
     }
 
     h1 {
@@ -139,7 +146,9 @@
     window.onload = function () {
       setTimeout(() => {
         document.getElementById("loader").style.display = "none"; // Скрываем SVG
-        document.getElementById("main-content").style.display = "flex"; // Показываем основной контент
+        const mainContent = document.getElementById("main-content");
+        mainContent.style.display = "flex"; // Показываем основной контент
+        setTimeout(() => mainContent.classList.add("visible"), 100); // Добавляем анимацию
       }, 1550); // Время загрузки в миллисекундах
     };
 
