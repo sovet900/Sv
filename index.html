@@ -26,16 +26,21 @@
       transition: opacity 1.5s ease-in-out;
     }
 
-    #loader object {
-      width: 250px; /* Увеличен размер SVG */
-      height: 250px; /* Увеличен размер SVG */
+    svg {
+      width: 300px; /* Подберите оптимальный размер */
+      height: auto;
     }
   </style>
 </head>
 <body>
-  <!-- Загрузка через SVG -->
+  <!-- Загрузка через встроенный SVG -->
   <div id="loader">
-    <object data="loader.svg" type="image/svg+xml"></object>
+    <!-- Вставьте содержимое вашего loader.svg сюда -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+      <!-- Ваш SVG-контент -->
+      <circle cx="250" cy="250" r="200" stroke="#ffdd00" stroke-width="10" fill="none" />
+      <text x="50%" y="50%" text-anchor="middle" fill="#ffdd00" dy=".3em" font-size="24">ASCETICS</text>
+    </svg>
   </div>
 
   <!-- Холст для звезд -->
