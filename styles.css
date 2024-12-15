@@ -5,6 +5,7 @@ body {
     overflow: hidden;
     font-family: 'Playfair Display', serif;
     color: #fff;
+    border: 5px solid #d4af37; /* Золотая рамка вокруг страницы */
 }
 
 /* Загрузка */
@@ -19,6 +20,7 @@ body {
     align-items: center;
     background: radial-gradient(circle, #0a0f29, #000216);
     z-index: 10;
+    border: 5px solid #d4af37; /* Золотая рамка вокруг загрузчика */
 }
 
 #loader.hidden {
@@ -48,6 +50,9 @@ body {
     opacity: 0;
     transform: scale(0.9);
     transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+    border: 2px solid #d4af37; /* Золотая рамка вокруг контента */
+    border-radius: 15px;
+    padding: 20px;
 }
 
 #main-content.visible {
@@ -76,6 +81,10 @@ p {
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
     margin-bottom: 30px;
     max-width: 500px;
+    border: 1px solid #d4af37; /* Золотая рамка вокруг текста */
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.4); /* Лёгкая тёмная подложка */
 }
 
 #main-image {
@@ -84,6 +93,10 @@ p {
     margin: 20px 0;
     opacity: 0.9;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    border: 2px solid #d4af37; /* Золотая рамка вокруг изображения */
+    border-radius: 50%;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.5);
 }
 
 #main-image:hover {
@@ -99,10 +112,12 @@ p {
     background: #32a852;
     border-radius: 8px;
     text-decoration: none;
-    transition: transform 0.3s ease, background 0.3s ease;
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+    border: 2px solid #d4af37; /* Золотая рамка вокруг кнопки */
 }
 
 .button:hover {
     transform: scale(1.1);
     background: #2e8b57;
+    border-color: #ffdd00; /* Изменение рамки на золотистую при наведении */
 }
