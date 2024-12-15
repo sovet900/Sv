@@ -1,124 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ритуал "Стакан воды"</title>
   <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Стили для загрузки */
-    #loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: radial-gradient(circle, #1b2735, #090a0f);
-      z-index: 10;
-    }
-
-    #loader.hidden {
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 1s ease-in-out;
-    }
-
-    svg {
-      width: 400px;
-      height: auto;
-    }
-
-    /* Стили для картинки */
-    #main-image {
-      max-width: 250px;
-      height: auto;
-      margin: 20px 0;
-      opacity: 0.9;
-      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    }
-
-    #main-image:hover {
-      transform: scale(1.1);
-      opacity: 1;
-    }
-
-    /* Эффект плавного появления страницы */
-    #main-content {
-      opacity: 0;
-      transform: scale(0.9);
-      transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
-    }
-
-    #main-content.visible {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    /* Стили для звёзд */
-    #starCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-
-    /* Основной контент */
-    #main-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      height: 100vh;
-    }
-
-    h1 {
-      font-size: 2.5em;
-      font-weight: bold;
-      color: #ffdd00;
-      text-shadow: 0 0 10px rgba(255, 223, 0, 0.8), 0 0 20px rgba(255, 223, 0, 0.6);
-      margin-bottom: 15px;
-    }
-
-    h2 {
-      font-size: 2em;
-      color: #ffffff;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
-      margin-bottom: 20px;
-    }
-
-    p {
-      font-size: 1.2em;
-      color: #f5f5dc;
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
-      margin-bottom: 30px;
-      max-width: 500px;
-    }
-
-    .button {
-      padding: 12px 25px;
-      font-size: 1em;
-      font-weight: bold;
-      color: white;
-      background: #32a852;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-
-    .button:hover {
-      transform: scale(1.1);
-      background: #2e8b57;
-    }
-  </style>
 </head>
 <body>
-  <!-- Загрузка через встроенный SVG -->
+  <!-- Загрузка -->
   <div id="loader">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200">
       <defs>
@@ -154,67 +43,7 @@
     <a href="phases.html" class="button">Начать</a>
   </div>
 
-  <script>
-    // Убираем загрузку и показываем контент
-    window.onload = function () {
-      const loader = document.getElementById("loader");
-      const mainContent = document.getElementById("main-content");
-      const starCanvas = document.getElementById("starCanvas");
-      const ctx = starCanvas.getContext('2d');
-      const stars = [];
-      const numStars = 150;
-
-      starCanvas.width = window.innerWidth;
-      starCanvas.height = window.innerHeight;
-
-      function createStar() {
-        return {
-          x: Math.random() * starCanvas.width,
-          y: Math.random() * starCanvas.height,
-          radius: Math.random() * 2,
-          alpha: Math.random(),
-          speed: Math.random() * 0.05,
-        };
-      }
-
-      for (let i = 0; i < numStars; i++) {
-        stars.push(createStar());
-      }
-
-      function animateStars() {
-        ctx.clearRect(0, 0, starCanvas.width, starCanvas.height);
-
-        stars.forEach((star) => {
-          star.alpha += star.speed;
-          if (star.alpha > 1 || star.alpha < 0) {
-            star.speed = -star.speed;
-          }
-
-          ctx.beginPath();
-          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
-          ctx.fill();
-        });
-
-        requestAnimationFrame(animateStars);
-      }
-
-      animateStars();
-
-      window.addEventListener('resize', () => {
-        starCanvas.width = window.innerWidth;
-        starCanvas.height = window.innerHeight;
-        stars.length = 0;
-        for (let i = 0; i < numStars; i++) {
-          stars.push(createStar());
-        }
-      });
-
-      setTimeout(() => {
-        loader.classList.add("hidden"); // Скрываем SVG
-        mainContent.classList.add("visible"); // Плавное появление контента
-      }, 1900); // Время загрузки SVG (1.9 секунды)
-    };
-  </script>
+  <!-- JavaScript -->
+  <script src="stars.js"></script>
 </body>
 </html>
