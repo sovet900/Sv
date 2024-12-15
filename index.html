@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ритуал "Стакан воды"</title>
-  <link rel="stylesheet" href="styles.css">
   <style>
     body {
       margin: 0;
@@ -12,7 +11,7 @@
       font-family: 'Helvetica Neue', Arial, sans-serif;
       background: radial-gradient(circle, #0a0f29 20%, #000216 80%);
       color: #fff;
-      overflow: hidden;
+      overflow-x: hidden; /* Отключаем горизонтальную прокрутку */
     }
 
     #loader {
@@ -42,20 +41,10 @@
     }
 
     #main-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
       text-align: center;
-      height: 100vh;
-      opacity: 0;
-      transform: scale(0.9);
-      transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
-    }
-
-    #main-content.visible {
-      opacity: 1;
-      transform: scale(1);
     }
 
     h1 {
@@ -88,6 +77,12 @@
     #main-image:hover {
       transform: scale(1.1);
       opacity: 1;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      line-height: 1.8;
     }
 
     .button {
@@ -156,7 +151,13 @@
     <h1>Ритуал "Стакан воды"</h1>
     <h2>"Исполнение желаний через воду"</h2>
     <img id="main-image" src="water-glass.png" alt="Стакан воды">
-    <p>С помощью этого ритуала вы можете заряжать воду энергией своих намерений и воплощать желания в жизнь.</p>
+    <p>
+      С помощью этого ритуала вы можете заряжать воду энергией своих намерений и воплощать желания в жизнь.
+    </p>
+    <p>
+      Пример текста: Это просто пример длинного текста, чтобы проверить, как страница выглядит 
+      при добавлении прокрутки. Продолжайте прокручивать вниз, чтобы увидеть больше информации.
+    </p>
     <a href="phases.html" class="button">Узнать больше</a>
   </div>
 
@@ -168,7 +169,8 @@
 
       setTimeout(() => {
         loader.classList.add("hidden");
-        mainContent.classList.add("visible");
+        mainContent.style.opacity = "1"; // Плавное появление
+        mainContent.style.transform = "scale(1)";
       }, 1900);
     };
   </script>
