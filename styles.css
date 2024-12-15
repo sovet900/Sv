@@ -1,142 +1,93 @@
 /* Общий фон */
 body {
-    margin: 0;
-    background: radial-gradient(circle, #0a0f29 20%, #000216 80%);
-    overflow: hidden;
-    font-family: 'Playfair Display', serif;
-    color: #fff;
-    /* Убрана квадратная рамка */
-}
-
-/* Загрузка */
-#loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: radial-gradient(circle, #0a0f29, #000216);
-    z-index: 10;
-    animation: fade-in 1.5s ease-in-out; /* Анимация появления */
-}
-
-#loader.hidden {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 1s ease-in-out;
-}
-
-/* SVG надпись */
-svg {
-    width: 400px;
-    height: auto;
-    animation: scale-up 1.5s ease-in-out; /* Анимация увеличения */
+  margin: 0;
+  background: radial-gradient(circle, #0a0f29 20%, #000216 80%);
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: #f5f5dc;
+  overflow: hidden;
 }
 
 /* Звёзды */
-#starCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 /* Основной контент */
 #main-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 100vh;
-    opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
-    border: none; /* Убрана рамка */
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.3); /* Полупрозрачная тёмная подложка */
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 2px solid rgba(212, 175, 55, 0.5); /* Приглушённая золотая рамка */
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
 }
 
-#main-content.visible {
-    opacity: 1;
-    transform: scale(1);
-}
-
+/* Заголовки */
 h1 {
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #ffdd00;
-    text-shadow: 0 0 10px rgba(255, 223, 0, 0.8), 0 0 20px rgba(255, 223, 0, 0.6);
-    margin-bottom: 15px;
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #ffdd00;
+  text-shadow: 0 0 10px rgba(255, 223, 0, 0.8), 0 0 20px rgba(255, 223, 0, 0.6);
+  text-align: center;
 }
 
 h2 {
-    font-size: 2em;
-    color: #ffffff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
-    margin-bottom: 20px;
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #87ceeb;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-shadow: 0 0 5px rgba(135, 206, 235, 0.5);
 }
 
-p {
-    font-size: 1.2em;
-    color: #f5f5dc;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
-    margin-bottom: 30px;
-    max-width: 500px;
+/* Текст */
+p, li {
+  font-size: 1.2em;
+  line-height: 1.8;
+  margin-bottom: 10px;
 }
 
-#main-image {
-    max-width: 250px;
-    height: auto;
-    margin: 20px 0;
-    opacity: 0.9;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    border-radius: 50%; /* Округлённое изображение */
-    padding: 5px;
-    background: rgba(0, 0, 0, 0.5); /* Лёгкая тёмная подложка */
+ul {
+  list-style: none;
+  padding: 0;
 }
 
-#main-image:hover {
-    transform: scale(1.1);
-    opacity: 1;
+li {
+  margin-left: 20px;
+  position: relative;
 }
 
+li::before {
+  content: "•";
+  color: #ffdd00;
+  font-size: 1.5em;
+  position: absolute;
+  left: -20px;
+  top: 0;
+}
+
+/* Кнопка */
 .button {
-    padding: 12px 25px;
-    font-size: 1em;
-    font-weight: bold;
-    color: white;
-    background: #32a852;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: transform 0.3s ease, background 0.3s ease;
+  display: block;
+  width: fit-content;
+  margin: 20px auto;
+  padding: 10px 25px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #fff;
+  background: #32a852;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
 .button:hover {
-    transform: scale(1.1);
-    background: #2e8b57;
-}
-
-/* Анимации */
-@keyframes fade-in {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-@keyframes scale-up {
-    0% {
-        transform: scale(0.8);
-    }
-    100% {
-        transform: scale(1);
-    }
+  transform: scale(1.1);
+  background: #2e8b57;
 }
