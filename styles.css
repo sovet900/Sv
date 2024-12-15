@@ -4,7 +4,7 @@ body {
   background: radial-gradient(circle, #0a0f29 20%, #000216 80%);
   font-family: 'Helvetica Neue', Arial, sans-serif;
   color: #f5f5dc;
-  overflow: hidden;
+  overflow-y: auto; /* Вертикальная прокрутка */
 }
 
 /* Звёзды */
@@ -26,6 +26,7 @@ canvas {
   border-radius: 15px;
   background: rgba(0, 0, 0, 0.6);
   box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+  overflow: auto; /* Чтобы контент не выходил за рамки */
 }
 
 /* Заголовки */
@@ -53,23 +54,13 @@ p, li {
   margin-bottom: 10px;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
+ol {
+  margin: 20px 0;
+  padding-left: 20px;
 }
 
-li {
-  margin-left: 20px;
-  position: relative;
-}
-
-li::before {
-  content: "•";
-  color: #ffdd00;
-  font-size: 1.5em;
-  position: absolute;
-  left: -20px;
-  top: 0;
+ol li {
+  margin-bottom: 10px;
 }
 
 /* Кнопка */
