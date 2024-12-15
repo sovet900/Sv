@@ -5,20 +5,172 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ритуал "Стакан воды"</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: radial-gradient(circle, #0a0f29 20%, #000216 80%);
+      color: #fff;
+      overflow: hidden;
+    }
+
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle, #0a0f29, #000216);
+      z-index: 10;
+      animation: fade-in 1.5s ease-in-out;
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1s ease-in-out;
+    }
+
+    svg {
+      width: 400px;
+      height: auto;
+      animation: scale-up 1.5s ease-in-out;
+    }
+
+    #main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100vh;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+    }
+
+    #main-content.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    h1 {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #ffdd00;
+      text-shadow: 0 0 10px rgba(255, 223, 0, 0.8), 0 0 20px rgba(255, 223, 0, 0.6);
+      margin-bottom: 15px;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      color: #ffffff;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+    }
+
+    #main-image {
+      max-width: 250px;
+      height: auto;
+      margin: 20px 0;
+      border: 2px solid rgba(212, 175, 55, 0.5);
+      border-radius: 50%;
+      padding: 5px;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0.9;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
+
+    #main-image:hover {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 25px;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #fff;
+      background: #32a852;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .button:hover {
+      transform: scale(1.1);
+      background: #2e8b57;
+    }
+
+    @keyframes fade-in {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes scale-up {
+      0% {
+        transform: scale(0.8);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
 </head>
 <body>
-  <canvas id="starCanvas"></canvas>
+  <!-- Загрузка -->
+  <div id="loader">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200">
+      <defs>
+        <linearGradient id="text-gradient" x1="0%" y1="0%" x2="100%">
+          <stop offset="0%" stop-color="#FFFFFF" />
+          <stop offset="100%" stop-color="#D3D3D3" />
+        </linearGradient>
+      </defs>
+      <text
+        font-family="Helvetica Neue, Arial, sans-serif"
+        font-size="60"
+        font-weight="bold"
+        fill="url(#text-gradient)"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        x="50%"
+        y="50%"
+      >
+        Аскет
+      </text>
+    </svg>
+  </div>
+
+  <!-- Основной контент -->
   <div id="main-content">
     <h1>Ритуал "Стакан воды"</h1>
     <h2>"Исполнение желаний через воду"</h2>
     <img id="main-image" src="water-glass.png" alt="Стакан воды">
-    <p>
-      С помощью этого ритуала вы можете заряжать воду энергией своих намерений 
-      и воплощать желания в жизнь.
-    </p>
+    <p>С помощью этого ритуала вы можете заряжать воду энергией своих намерений и воплощать желания в жизнь.</p>
     <a href="phases.html" class="button">Узнать больше</a>
   </div>
 
-  <script src="stars.js"></script>
+  <!-- Скрипт -->
+  <script>
+    window.onload = function () {
+      const loader = document.getElementById("loader");
+      const mainContent = document.getElementById("main-content");
+
+      setTimeout(() => {
+        loader.classList.add("hidden");
+        mainContent.classList.add("visible");
+      }, 1900);
+    };
+  </script>
 </body>
 </html>
