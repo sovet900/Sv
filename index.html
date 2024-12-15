@@ -7,43 +7,25 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Загрузка -->
-  <div id="loader">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200">
-      <defs>
-        <linearGradient id="text-gradient" x1="0%" y1="0%" x2="100%">
-          <stop offset="0%" stop-color="#FFFFFF" />
-          <stop offset="100%" stop-color="#D3D3D3" />
-        </linearGradient>
-      </defs>
-      <text
-        font-family="Helvetica Neue, Arial, sans-serif"
-        font-size="60"
-        font-weight="bold"
-        fill="url(#text-gradient)"
-        text-anchor="middle"
-        dominant-baseline="middle"
-        x="50%"
-        y="50%"
-      >
-        ASCETICS
-      </text>
-    </svg>
-  </div>
-
-  <!-- Холст для звёзд -->
   <canvas id="starCanvas"></canvas>
-
-  <!-- Основной контент -->
   <div id="main-content">
-    <h1>Ритуал</h1>
-    <h2>"Стакан воды"</h2>
-    <img id="main-image" src="water-glass.png" alt="Стакан воды">
-    <p>С помощью этого ритуала вы можете загадывать желания, заряжая воду своей энергией.</p>
-    <a href="phases.html" class="button">Начать</a>
+    <h1>Ритуал "Стакан воды"</h1>
+    <p>
+      Ритуал «Стакан воды» помогает воплотить желания, используя силу подсознания и энергию воды.
+      Этот метод, популяризированный Вадимом Зеландом, включает следующие шаги:
+    </p>
+
+    <h2>Steps:</h2>
+    <ol>
+      <li>Step 1: Напишите желание на листе бумаги.</li>
+      <li>Step 2: Зарядите воду энергией своего намерения.</li>
+      <li>Step 3: Оставьте стакан на листе на ночь.</li>
+      <li>Step 4: Выпейте воду утром с уверенностью, что желание исполнится.</li>
+    </ol>
+
+    <a href="phases.html" class="button">Назад к фазам Луны</a>
   </div>
 
-  <!-- JavaScript -->
   <script src="stars.js"></script>
 </body>
 </html>
