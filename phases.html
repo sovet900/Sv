@@ -11,7 +11,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Roboto', Arial, sans-serif;
-      background: radial-gradient(circle, #1b2735, #090a0f);
+      background: radial-gradient(circle, #00111e, #090a0f);
       color: #e0e0e0;
       overflow: hidden;
       opacity: 0;
@@ -33,21 +33,12 @@
       z-index: -1;
     }
 
-    #main-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      height: 100vh;
-    }
-
     h1 {
       font-size: 3em;
       font-family: 'Playfair Display', serif;
       font-weight: bold;
-      color: #ffdd00;
-      text-shadow: 0 0 10px rgba(255, 223, 0, 0.8), 0 0 20px rgba(255, 223, 0, 0.6);
+      color: #5a9ea8;
+      text-shadow: 0 0 15px #5a9ea8, 0 0 30px #3b6d74;
       margin-bottom: 20px;
     }
 
@@ -59,6 +50,7 @@
 
     li {
       font-size: 1.5em;
+      font-family: 'Roboto', sans-serif;
       color: #f5f5dc;
       margin-bottom: 15px;
       line-height: 1.6;
@@ -78,22 +70,23 @@
 
     .button {
       display: inline-block;
-      padding: 15px 30px;
-      font-size: 1.2em;
-      font-weight: bold;
-      color: white;
-      background: #32a852;
+      padding: 12px 30px;
+      font-size: 1.1em;
+      font-weight: 500;
+      color: #000;
+      background: linear-gradient(45deg, #5a9ea8, #3b6d74);
       border: none;
-      border-radius: 8px;
+      border-radius: 50px;
       text-decoration: none;
       cursor: pointer;
-      transition: transform 0.3s ease, background 0.3s ease;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(90, 158, 168, 0.4);
       margin-top: 20px;
     }
 
     .button:hover {
-      transform: scale(1.1);
-      background: #2e8b57;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(90, 158, 168, 0.6);
     }
   </style>
 </head>
@@ -103,7 +96,9 @@
   <div id="main-content">
     <div class="paper">
       <h1>Фазы Луны</h1>
-      <p>Ближайшие фазы Луны:</p>
+      <p style="font-size: 1.2em; line-height: 1.8; font-family: 'Roboto', sans-serif; color: #555;">
+        Ближайшие фазы Луны:
+      </p>
       <ul id="moon-phases-list"></ul>
       <a href="steps.html" class="button">Перейти к ритуалу</a>
     </div>
