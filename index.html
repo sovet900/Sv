@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ритуал "Стакан воды"</title>
+  <title>Ритуал Воды</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;500&display=swap');
+
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Roboto', Arial, sans-serif;
       background: radial-gradient(circle at 50% 50%, #000b1f, #000000 90%);
       color: #fff;
       overflow-x: hidden;
@@ -52,69 +54,64 @@
     }
 
     #main-content {
-      max-width: 800px;
-      margin: 50px auto;
-      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
       text-align: center;
-      z-index: 2;
+      max-width: 800px;
+      margin: 100px auto;
       position: relative;
+      z-index: 2;
+    }
+
+    .text-block {
+      text-align: left;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-left: 5px solid #d4af37;
+      animation: slide-in 1.5s ease forwards;
+      transform: translateX(-100%);
+      opacity: 0;
     }
 
     h1 {
-      font-size: 3em;
-      font-weight: bold;
+      font-size: 2.8em;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
       color: #d4af37;
-      text-shadow: 0 0 15px #d4af37, 0 0 30px #a78628, 0 0 45px #725e1b;
-      margin-bottom: 15px;
-    }
-
-    h2 {
-      font-size: 1.5em;
-      color: #e0e0e0;
+      text-shadow: 0 0 15px #d4af37, 0 0 30px #a78628;
       margin-bottom: 20px;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    }
-
-    #main-image {
-      max-width: 250px;
-      height: auto;
-      margin: 30px 0;
-      border: 2px solid rgba(212, 175, 55, 0.5);
-      border-radius: 50%;
-      padding: 5px;
-      background: rgba(0, 0, 0, 0.5);
-      opacity: 0.9;
-      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    }
-
-    #main-image:hover {
-      transform: scale(1.1);
-      opacity: 1;
     }
 
     p {
       font-size: 1.3em;
-      margin-bottom: 30px;
-      line-height: 1.8;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
+      color: #e0e0e0;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
     }
 
     .button {
       display: inline-block;
-      padding: 15px 40px;
-      font-size: 1.2em;
-      font-weight: bold;
+      margin-top: 20px;
+      padding: 12px 30px;
+      font-size: 1.1em;
+      font-weight: 500;
       color: #000;
       background: linear-gradient(45deg, #d4af37, #a78628);
-      border-radius: 8px;
+      border: none;
+      border-radius: 50px;
       text-decoration: none;
-      transition: transform 0.3s ease, background 0.3s ease;
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
     }
 
     .button:hover {
-      transform: scale(1.1);
-      background: linear-gradient(45deg, #a78628, #725e1b);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(212, 175, 55, 0.6);
     }
 
     @keyframes fade-in {
@@ -132,6 +129,17 @@
       }
       100% {
         transform: scale(1);
+      }
+    }
+
+    @keyframes slide-in {
+      0% {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
       }
     }
   </style>
@@ -165,26 +173,20 @@
 
   <!-- Основной контент -->
   <div id="main-content">
-    <h1>Ритуал Воды</h1>
-    <h2>Энергия мысли в каждом глотке</h2>
-    <img id="main-image" src="water-glass.png" alt="Стакан воды">
-    <p>
-      Зарядите воду своими намерениями. Сила ритуала – в простоте и фокусе.
-    </p>
-    <a href="phases.html" class="button">Подробнее</a>
+    <div class="text-block">
+      <h1>Ритуал воды</h1>
+      <p>Простота. Чистота. Сила мысли. Откройте новый уровень энергии через воду.</p>
+      <a href="phases.html" class="button">Подробнее</a>
+    </div>
   </div>
 
   <!-- Скрипт -->
   <script>
     window.onload = function () {
       const loader = document.getElementById("loader");
-      const mainContent = document.getElementById("main-content");
-
       setTimeout(() => {
         loader.classList.add("hidden");
-        mainContent.style.opacity = "1";
-        mainContent.style.transform = "scale(1)";
-      }, 1900);
+      }, 1500);
     };
   </script>
 </body>
