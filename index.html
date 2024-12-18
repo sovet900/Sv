@@ -11,9 +11,10 @@
       margin: 0;
       padding: 0;
       font-family: 'Roboto', Arial, sans-serif;
-      background: radial-gradient(circle at 50% 50%, #000b1f, #000000 90%);
-      color: #fff;
+      background: radial-gradient(circle at 50% 50%, #00111e, #000000 90%);
+      color: #e0e0e0;
       overflow-x: hidden;
+      position: relative;
     }
 
     #stars {
@@ -27,6 +28,18 @@
       z-index: 1;
     }
 
+    #moon-pattern {
+      position: absolute;
+      top: 10%;
+      right: 5%;
+      width: 300px;
+      height: 300px;
+      background: url('https://cdn.pixabay.com/photo/2017/02/18/20/25/moon-2072031_960_720.png') no-repeat center/cover;
+      opacity: 0.3;
+      transform: rotate(-15deg);
+      z-index: 0;
+    }
+
     #loader {
       position: fixed;
       top: 0;
@@ -36,7 +49,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(circle, #000b1f, #000000);
+      background: radial-gradient(circle, #00111e, #000000);
       z-index: 10;
       animation: fade-in 1.5s ease-in-out;
     }
@@ -70,7 +83,8 @@
       max-width: 600px;
       background: rgba(255, 255, 255, 0.1);
       padding: 20px;
-      border-left: 5px solid #d4af37;
+      border-left: 5px solid #5a9ea8;
+      border-radius: 8px;
       animation: slide-in 1.5s ease forwards;
       transform: translateX(-100%);
       opacity: 0;
@@ -80,8 +94,8 @@
       font-size: 2.8em;
       font-family: 'Playfair Display', serif;
       font-weight: 700;
-      color: #d4af37;
-      text-shadow: 0 0 15px #d4af37, 0 0 30px #a78628;
+      color: #5a9ea8;
+      text-shadow: 0 0 15px #5a9ea8, 0 0 30px #3b6d74;
       margin-bottom: 20px;
     }
 
@@ -100,18 +114,18 @@
       font-size: 1.1em;
       font-weight: 500;
       color: #000;
-      background: linear-gradient(45deg, #d4af37, #a78628);
+      background: linear-gradient(45deg, #5a9ea8, #3b6d74);
       border: none;
       border-radius: 50px;
       text-decoration: none;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+      box-shadow: 0 5px 15px rgba(90, 158, 168, 0.4);
     }
 
     .button:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(212, 175, 55, 0.6);
+      box-shadow: 0 10px 20px rgba(90, 158, 168, 0.6);
     }
 
     @keyframes fade-in {
@@ -146,6 +160,7 @@
 </head>
 <body>
   <div id="stars"></div>
+  <div id="moon-pattern"></div>
 
   <!-- Загрузка -->
   <div id="loader">
@@ -153,7 +168,7 @@
       <defs>
         <linearGradient id="text-gradient" x1="0%" y1="0%" x2="100%">
           <stop offset="0%" stop-color="#FFFFFF" />
-          <stop offset="100%" stop-color="#d4af37" />
+          <stop offset="100%" stop-color="#5a9ea8" />
         </linearGradient>
       </defs>
       <text
