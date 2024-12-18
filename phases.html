@@ -105,65 +105,64 @@
   </div>
 
   <script>
-    // Анимация появления страницы
     window.onload = function () {
       document.body.classList.add("visible");
-    };
 
-    // Звёздная анимация
-    const canvas = document.getElementById('starCanvas');
-    const ctx = canvas.getContext('2d');
+      // Проверка существования canvas
+      const canvas = document.getElementById('starCanvas');
+      if (!canvas) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let stars = [];
-    const numStars = 150;
-
-    function createStar() {
-      return {
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 2,
-        alpha: Math.random(),
-        speed: Math.random() * 0.05,
-      };
-    }
-
-    for (let i = 0; i < numStars; i++) {
-      stars.push(createStar());
-    }
-
-    function animateStars() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      stars.forEach((star) => {
-        star.alpha += star.speed;
-        if (star.alpha > 1 || star.alpha < 0) {
-          star.speed = -star.speed;
-        }
-
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
-        ctx.fill();
-      });
-
-      requestAnimationFrame(animateStars);
-    }
-
-    animateStars();
-
-    window.addEventListener('resize', () => {
+      const ctx = canvas.getContext('2d');
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      stars = [];
+
+      let stars = [];
+      const numStars = 150;
+
+      function createStar() {
+        return {
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 2,
+          alpha: Math.random(),
+          speed: Math.random() * 0.05,
+        };
+      }
+
       for (let i = 0; i < numStars; i++) {
         stars.push(createStar());
       }
-    });
 
-    // Расчёт фаз Луны
+      function animateStars() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        stars.forEach((star) => {
+          star.alpha += star.speed;
+          if (star.alpha > 1 || star.alpha < 0) {
+            star.speed = -star.speed;
+          }
+
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+          ctx.fill();
+        });
+
+        requestAnimationFrame(animateStars);
+      }
+
+      animateStars();
+
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        stars = [];
+        for (let i = 0; i < numStars; i++) {
+          stars.push(createStar());
+        }
+      });
+    };
+
     function calculateMoonPhases() {
       const today = new Date();
       const lunarCycle = 29.53058867;
@@ -181,7 +180,6 @@
       };
     }
 
-    // Отображение фаз Луны
     function displayMoonPhases() {
       const phases = calculateMoonPhases();
       const list = document.getElementById('moon-phases-list');
