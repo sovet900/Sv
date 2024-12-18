@@ -69,61 +69,50 @@
     #main-content {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      max-width: 1000px;
+      justify-content: center;
+      flex-direction: column;
+      max-width: 800px;
       margin: 100px auto;
       position: relative;
       z-index: 2;
     }
 
-    .text-block {
-      text-align: left;
-      max-width: 600px;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-left: 5px solid #5a9ea8;
-      border-radius: 8px;
-      animation: slide-in 1.5s ease forwards;
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-
-    .image-block {
-      max-width: 300px;
+    .paper {
+      background: #f9f5ec;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      max-width: 700px;
+      text-align: center;
       position: relative;
-      animation: fade-in 2s ease forwards;
-      transform: scale(0.9);
-      opacity: 0;
+      z-index: 3;
     }
 
-    .image-block img {
-      width: 100%;
-      border: 5px solid rgba(90, 158, 168, 0.5);
+    .paper h1 {
+      font-size: 2.5em;
+      font-family: 'Playfair Display', serif;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .paper p {
+      font-size: 1.2em;
+      line-height: 1.8;
+      color: #555;
+    }
+
+    .paper img {
+      width: 150px;
+      margin-top: 20px;
       border-radius: 50%;
+      border: 5px solid rgba(90, 158, 168, 0.5);
       box-shadow: 0 10px 20px rgba(90, 158, 168, 0.6);
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
 
-    .image-block img:hover {
+    .paper img:hover {
       transform: scale(1.1);
       opacity: 1;
-    }
-
-    h1 {
-      font-size: 2.8em;
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      color: #5a9ea8;
-      text-shadow: 0 0 15px #5a9ea8, 0 0 30px #3b6d74;
-      margin-bottom: 20px;
-    }
-
-    p {
-      font-size: 1.3em;
-      font-family: 'Roboto', sans-serif;
-      line-height: 1.6;
-      color: #e0e0e0;
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
     }
 
     .button {
@@ -164,17 +153,6 @@
         transform: scale(1);
       }
     }
-
-    @keyframes slide-in {
-      0% {
-        transform: translateX(-100%);
-        opacity: 0;
-      }
-      100% {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
   </style>
 </head>
 <body>
@@ -207,13 +185,11 @@
 
   <!-- Основной контент -->
   <div id="main-content">
-    <div class="text-block">
+    <div class="paper">
       <h1>Ритуал воды</h1>
       <p>Простота. Чистота. Сила мысли. Откройте новый уровень энергии через воду.</p>
-      <a href="phases.html" class="button">Подробнее</a>
-    </div>
-    <div class="image-block">
       <img src="water-glass.png" alt="Стакан воды">
+      <a href="phases.html" class="button">Подробнее</a>
     </div>
   </div>
 
