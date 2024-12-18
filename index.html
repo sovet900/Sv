@@ -26,6 +26,16 @@
       background: url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
       opacity: 0.4;
       z-index: 1;
+      animation: twinkle 3s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0% {
+        opacity: 0.3;
+      }
+      100% {
+        opacity: 0.5;
+      }
     }
 
     #moon-pattern {
@@ -68,9 +78,9 @@
 
     #main-content {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
       max-width: 800px;
       margin: 100px auto;
       position: relative;
@@ -78,7 +88,7 @@
     }
 
     .paper {
-      background: #f9f5ec;
+      background: rgba(249, 245, 236, 0.8);
       padding: 30px;
       border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -86,6 +96,7 @@
       text-align: center;
       position: relative;
       z-index: 3;
+      margin-bottom: 40px;
     }
 
     .paper img {
@@ -130,6 +141,30 @@
     .button:hover {
       transform: translateY(-3px);
       box-shadow: 0 10px 20px rgba(90, 158, 168, 0.6);
+    }
+
+    .story-block {
+      background: rgba(249, 245, 236, 0.85);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      max-width: 700px;
+      text-align: left;
+      position: relative;
+      z-index: 3;
+    }
+
+    .story-block h2 {
+      font-size: 2em;
+      font-family: 'Playfair Display', serif;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .story-block p {
+      font-size: 1.1em;
+      line-height: 1.8;
+      color: #555;
     }
 
     @keyframes fade-in {
@@ -186,6 +221,11 @@
       <img src="water-glass.png" alt="Стакан воды">
       <p>Простота. Чистота. Сила мысли. Откройте новый уровень энергии через воду.</p>
       <a href="phases.html" class="button">Подробнее</a>
+    </div>
+
+    <div class="story-block">
+      <h2>Моя история</h2>
+      <p>Это тестовый текст. Здесь вы сможете рассказать о себе, своей философии или вдохновении, связанном с ритуалом воды.</p>
     </div>
   </div>
 
