@@ -5,13 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Фазы Луны</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;500&display=swap');
+
     body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       margin: 0;
       padding: 0;
-      overflow: hidden;
+      font-family: 'Roboto', Arial, sans-serif;
       background: radial-gradient(circle, #1b2735, #090a0f);
-      color: white;
+      color: #e0e0e0;
+      overflow: hidden;
       opacity: 0;
       transform: scale(0.9);
       transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
@@ -42,19 +44,11 @@
 
     h1 {
       font-size: 3em;
+      font-family: 'Playfair Display', serif;
       font-weight: bold;
       color: #ffdd00;
       text-shadow: 0 0 10px rgba(255, 223, 0, 0.8), 0 0 20px rgba(255, 223, 0, 0.6);
       margin-bottom: 20px;
-    }
-
-    p {
-      font-size: 1.5em;
-      color: #f5f5dc;
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
-      margin-bottom: 30px;
-      max-width: 600px;
-      text-align: center;
     }
 
     ul {
@@ -64,11 +58,22 @@
     }
 
     li {
-      font-size: 1.2em;
+      font-size: 1.5em;
       color: #f5f5dc;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       line-height: 1.6;
       text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    }
+
+    .paper {
+      background: rgba(249, 245, 236, 0.6);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      max-width: 700px;
+      text-align: center;
+      z-index: 3;
+      margin: 20px auto;
     }
 
     .button {
@@ -96,10 +101,12 @@
   <canvas id="starCanvas"></canvas>
 
   <div id="main-content">
-    <h1>Фазы Луны</h1>
-    <p>Ближайшие фазы Луны:</p>
-    <ul id="moon-phases-list"></ul>
-    <a href="steps.html" class="button">Перейти к ритуалу</a>
+    <div class="paper">
+      <h1>Фазы Луны</h1>
+      <p>Ближайшие фазы Луны:</p>
+      <ul id="moon-phases-list"></ul>
+      <a href="steps.html" class="button">Перейти к ритуалу</a>
+    </div>
   </div>
 
   <script>
