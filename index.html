@@ -69,10 +69,8 @@
     #main-content {
       display: flex;
       align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      max-width: 800px;
+      justify-content: space-between;
+      max-width: 1000px;
       margin: 100px auto;
       position: relative;
       z-index: 2;
@@ -88,6 +86,27 @@
       animation: slide-in 1.5s ease forwards;
       transform: translateX(-100%);
       opacity: 0;
+    }
+
+    .image-block {
+      max-width: 300px;
+      position: relative;
+      animation: fade-in 2s ease forwards;
+      transform: scale(0.9);
+      opacity: 0;
+    }
+
+    .image-block img {
+      width: 100%;
+      border: 5px solid rgba(90, 158, 168, 0.5);
+      border-radius: 50%;
+      box-shadow: 0 10px 20px rgba(90, 158, 168, 0.6);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .image-block img:hover {
+      transform: scale(1.1);
+      opacity: 1;
     }
 
     h1 {
@@ -192,6 +211,9 @@
       <h1>Ритуал воды</h1>
       <p>Простота. Чистота. Сила мысли. Откройте новый уровень энергии через воду.</p>
       <a href="phases.html" class="button">Подробнее</a>
+    </div>
+    <div class="image-block">
+      <img src="water-glass.png" alt="Стакан воды">
     </div>
   </div>
 
