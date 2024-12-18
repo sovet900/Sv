@@ -9,9 +9,20 @@
       margin: 0;
       padding: 0;
       font-family: 'Helvetica Neue', Arial, sans-serif;
-      background: radial-gradient(circle, #0a0f29 20%, #000216 80%);
+      background: radial-gradient(circle at 50% 50%, #00101b, #000000 90%);
       color: #fff;
-      overflow-x: hidden; /* Отключаем горизонтальную прокрутку */
+      overflow-x: hidden;
+    }
+
+    #stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+      opacity: 0.5;
+      z-index: 1;
     }
 
     #loader {
@@ -23,7 +34,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(circle, #0a0f29, #000216);
+      background: radial-gradient(circle, #000428, #000000);
       z-index: 10;
       animation: fade-in 1.5s ease-in-out;
     }
@@ -45,13 +56,15 @@
       margin: 50px auto;
       padding: 20px;
       text-align: center;
+      z-index: 2;
+      position: relative;
     }
 
     h1 {
       font-size: 2.5em;
       font-weight: bold;
-      color: #ffdd00;
-      text-shadow: 0 0 10px rgba(255, 223, 0, 0.8), 0 0 20px rgba(255, 223, 0, 0.6);
+      color: #38b6ff;
+      text-shadow: 0 0 15px #38b6ff, 0 0 30px #1d80a5, 0 0 45px #156780;
       margin-bottom: 15px;
     }
 
@@ -59,14 +72,14 @@
       font-size: 1.8em;
       color: #ffffff;
       margin-bottom: 20px;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 25px rgba(255, 255, 255, 0.6);
     }
 
     #main-image {
       max-width: 250px;
       height: auto;
       margin: 20px 0;
-      border: 2px solid rgba(212, 175, 55, 0.5);
+      border: 2px solid rgba(56, 182, 255, 0.5);
       border-radius: 50%;
       padding: 5px;
       background: rgba(0, 0, 0, 0.5);
@@ -83,6 +96,7 @@
       font-size: 1.2em;
       margin-bottom: 20px;
       line-height: 1.8;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
     }
 
     .button {
@@ -91,15 +105,16 @@
       font-size: 1.2em;
       font-weight: bold;
       color: #fff;
-      background: #32a852;
+      background: linear-gradient(45deg, #38b6ff, #1d80a5);
       border-radius: 8px;
       text-decoration: none;
       transition: transform 0.3s ease, background 0.3s ease;
+      box-shadow: 0 0 15px rgba(56, 182, 255, 0.5);
     }
 
     .button:hover {
       transform: scale(1.1);
-      background: #2e8b57;
+      background: linear-gradient(45deg, #1d80a5, #156780);
     }
 
     @keyframes fade-in {
@@ -122,13 +137,15 @@
   </style>
 </head>
 <body>
+  <div id="stars"></div>
+
   <!-- Загрузка -->
   <div id="loader">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200">
       <defs>
         <linearGradient id="text-gradient" x1="0%" y1="0%" x2="100%">
           <stop offset="0%" stop-color="#FFFFFF" />
-          <stop offset="100%" stop-color="#D3D3D3" />
+          <stop offset="100%" stop-color="#38b6ff" />
         </linearGradient>
       </defs>
       <text
@@ -165,7 +182,7 @@
 
       setTimeout(() => {
         loader.classList.add("hidden");
-        mainContent.style.opacity = "1"; // Плавное появление
+        mainContent.style.opacity = "1";
         mainContent.style.transform = "scale(1)";
       }, 1900);
     };
