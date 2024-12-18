@@ -96,7 +96,7 @@
     }
 
     .paper {
-      background: rgba(249, 245, 236, 0.6); /* Увеличена прозрачность */
+      background: rgba(249, 245, 236, 0.6); /* Прозрачность бумаги */
       padding: 30px;
       border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -150,48 +150,6 @@
       transform: translateY(-3px);
       box-shadow: 0 10px 20px rgba(90, 158, 168, 0.6);
     }
-
-    .story-block {
-      background: rgba(249, 245, 236, 0.6); /* Прозрачность аналогичная */
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      max-width: 700px;
-      text-align: left;
-      position: relative;
-      z-index: 3;
-    }
-
-    .story-block h2 {
-      font-size: 2em;
-      font-family: 'Playfair Display', serif;
-      color: #333;
-      margin-bottom: 15px;
-    }
-
-    .story-block p {
-      font-size: 1.1em;
-      line-height: 1.8;
-      color: #555;
-    }
-
-    @keyframes fade-in {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-
-    @keyframes scale-up {
-      0% {
-        transform: scale(0.8);
-      }
-      100% {
-        transform: scale(1);
-      }
-    }
   </style>
 </head>
 <body>
@@ -211,7 +169,6 @@
         font-family="Helvetica Neue, Arial, sans-serif"
         font-size="60"
         font-weight="bold"
-        fill0
         fill="url(#text-gradient)"
         text-anchor="middle"
         dominant-baseline="middle"
