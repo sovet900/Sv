@@ -4,10 +4,106 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ритуал "Стакан воды"</title>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;500&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: radial-gradient(circle at 50% 50%, #00111e, #000000 90%);
+      color: #e0e0e0;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    #starCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: #ffdd00;
+      text-shadow: 0 0 10px rgba(255, 223, 0, 0.8), 0 0 20px rgba(255, 223, 0, 0.6);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      color: #ffffff;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+    }
+
+    p, li {
+      font-size: 1.2em;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      color: #ddd;
+      text-align: justify;
+    }
+
+    ul {
+      list-style-type: disc;
+      margin-left: 40px;
+    }
+
+    .recommendations ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .recommendations li {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .recommendations strong {
+      color: #ffdd00;
+    }
+
+    #main-content {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      text-align: left;
+      background: rgba(249, 245, 236, 0.6);
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .button {
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: white;
+      background: #32a852;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+      text-align: center;
+    }
+
+    .button:hover {
+      transform: scale(1.1);
+      background: #2e8b57;
+    }
+  </style>
 </head>
 <body>
   <canvas id="starCanvas"></canvas>
+
   <div id="main-content">
     <h1>Ритуал "Стакан воды"</h1>
     <p>
@@ -55,6 +151,59 @@
     <a href="phases.html" class="button">Назад к фазам Луны</a>
   </div>
 
-  <script src="stars.js"></script>
+  <script>
+    // Анимация звёздного неба
+    const canvas = document.getElementById('starCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let stars = [];
+    const numStars = 150;
+
+    function createStar() {
+      return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2,
+        alpha: Math.random(),
+        speed: Math.random() * 0.05,
+      };
+    }
+
+    for (let i = 0; i < numStars; i++) {
+      stars.push(createStar());
+    }
+
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      stars.forEach((star) => {
+        star.alpha += star.speed;
+        if (star.alpha > 1 || star.alpha < 0) {
+          star.speed = -star.speed;
+        }
+
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animateStars);
+    }
+
+    animateStars();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      stars = [];
+      for (let i = 0; i < numStars; i++) {
+        stars.push(createStar());
+      }
+    });
+  </script>
 </body>
 </html>
