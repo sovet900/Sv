@@ -26,29 +26,36 @@
       z-index: -1;
     }
 
-    h1 {
-      font-size: 2.5em;
+    .block {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 30px;
+      background: rgba(249, 245, 236, 0.6);
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    h1, h2 {
       font-family: 'Playfair Display', serif;
-      font-weight: bold;
       color: #ffdd00;
       text-shadow: 0 0 10px rgba(255, 223, 0, 0.8), 0 0 20px rgba(255, 223, 0, 0.6);
-      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 2.5em;
       text-align: center;
+      margin-bottom: 20px;
     }
 
     h2 {
       font-size: 1.8em;
-      color: #ffffff;
-      margin-bottom: 20px;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+      margin-bottom: 15px;
     }
 
     p, li {
       font-size: 1.2em;
       line-height: 1.8;
-      margin-bottom: 20px;
-      color: #ddd;
-      text-align: justify;
+      color: #333;
     }
 
     ul {
@@ -56,28 +63,8 @@
       margin-left: 40px;
     }
 
-    .recommendations ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    .recommendations li {
-      margin-bottom: 15px;
-      line-height: 1.6;
-    }
-
-    .recommendations strong {
+    .recommendations li strong {
       color: #ffdd00;
-    }
-
-    #main-content {
-      max-width: 800px;
-      margin: 50px auto;
-      padding: 20px;
-      text-align: left;
-      background: rgba(249, 245, 236, 0.6);
-      border-radius: 15px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     }
 
     .button {
@@ -92,6 +79,7 @@
       text-decoration: none;
       cursor: pointer;
       transition: transform 0.3s ease, background 0.3s ease;
+      margin-top: 20px;
       text-align: center;
     }
 
@@ -99,25 +87,36 @@
       transform: scale(1.1);
       background: #2e8b57;
     }
+
+    .button-block {
+      text-align: center;
+    }
   </style>
 </head>
 <body>
   <canvas id="starCanvas"></canvas>
 
-  <div id="main-content">
+  <!-- Блок заголовка -->
+  <div class="block">
     <h1>Ритуал "Стакан воды"</h1>
     <p>
       Ритуал «Стакан воды» помогает воплотить желания, используя силу подсознания и энергию воды. 
       Этот метод, популяризированный Вадимом Зеландом, включает следующие шаги:
     </p>
+  </div>
 
+  <!-- Блок "Подготовка" -->
+  <div class="block">
     <h2>1. Подготовка:</h2>
     <ul>
       <li>Возьмите чистый лист бумаги и ручку.</li>
       <li>Сформулируйте своё желание в утвердительной форме, как будто оно уже исполнилось.</li>
       <li>Запишите своё желание на бумаге.</li>
     </ul>
+  </div>
 
+  <!-- Блок "Зарядка воды" -->
+  <div class="block">
     <h2>2. Зарядка воды:</h2>
     <ul>
       <li>Налейте в прозрачный стакан чистую питьевую воду.</li>
@@ -125,34 +124,44 @@
       <li>Держа ладони по бокам стакана, сосредоточьтесь на своём желании.</li>
       <li>Представьте, как энергия вашего намерения передаётся воде.</li>
     </ul>
+  </div>
 
+  <!-- Блок "Закрепление намерения" -->
+  <div class="block">
     <h2>3. Закрепление намерения:</h2>
     <ul>
       <li>Поставьте стакан на записанный лист с желанием.</li>
       <li>Оставьте его на ночь, позволяя воде впитать энергию вашего намерения.</li>
     </ul>
+  </div>
 
+  <!-- Блок "Завершение ритуала" -->
+  <div class="block">
     <h2>4. Завершение ритуала:</h2>
     <ul>
       <li>Утром, сразу после пробуждения, возьмите стакан с водой.</li>
       <li>Сконцентрируйтесь на своём желании, ещё раз представив его исполненным.</li>
       <li>Медленно выпейте воду, ощущая, как энергия желания наполняет вас.</li>
     </ul>
+  </div>
 
+  <!-- Блок "Дополнительные рекомендации" -->
+  <div class="block">
     <h2>Дополнительные рекомендации:</h2>
-    <div class="recommendations">
-      <ul>
-        <li><strong>Чистота воды:</strong> Используйте родниковую, талую или бутилированную воду. Кипячёная вода не подходит.</li>
-        <li><strong>Формулировка желания:</strong> Избегайте отрицательных частиц. Например, вместо «Я не болею» пишите «Я полностью здоров».</li>
-        <li><strong>Визуализация:</strong> Чётко представляйте исполнение желания и испытывайте связанные с этим положительные эмоции.</li>
-      </ul>
-    </div>
+    <ul>
+      <li><strong>Чистота воды:</strong> Используйте родниковую, талую или бутилированную воду. Кипячёная вода не подходит.</li>
+      <li><strong>Формулировка желания:</strong> Избегайте отрицательных частиц. Например, вместо «Я не болею» пишите «Я полностью здоров».</li>
+      <li><strong>Визуализация:</strong> Чётко представляйте исполнение желания и испытывайте связанные с этим положительные эмоции.</li>
+    </ul>
+  </div>
 
+  <!-- Кнопка возврата -->
+  <div class="button-block">
     <a href="phases.html" class="button">Назад к фазам Луны</a>
   </div>
 
+  <!-- Скрипт для звёзд -->
   <script>
-    // Анимация звёздного неба
     const canvas = document.getElementById('starCanvas');
     const ctx = canvas.getContext('2d');
 
