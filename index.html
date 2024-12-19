@@ -96,7 +96,7 @@
     }
 
     .paper {
-      background: rgba(249, 245, 236, 0.6); /* Прозрачность бумаги */
+      background: rgba(249, 245, 236, 0.6);
       padding: 30px;
       border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -204,13 +204,15 @@
       }, 1500);
 
       const starsContainer = document.getElementById("stars");
-      for (let i = 0; i < 150; i++) {
-        const star = document.createElement("div");
-        star.classList.add("star");
-        star.style.top = Math.random() * 100 + "%";
-        star.style.left = Math.random() * 100 + "%";
-        star.style.animationDelay = Math.random() * 2 + "s";
-        starsContainer.appendChild(star);
+      if (starsContainer) {
+        for (let i = 0; i < 150; i++) {
+          const star = document.createElement("div");
+          star.classList.add("star");
+          star.style.top = Math.random() * 100 + "%";
+          star.style.left = Math.random() * 100 + "%";
+          star.style.animationDelay = Math.random() * 2 + "s";
+          starsContainer.appendChild(star);
+        }
       }
     };
   </script>
