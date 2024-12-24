@@ -13,32 +13,13 @@
       font-family: 'Roboto', Arial, sans-serif;
       background: radial-gradient(circle, #00111e, #090a0f);
       color: #e0e0e0;
-      overflow: hidden;
-      opacity: 0;
-      transform: scale(0.9);
-      transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
-    }
-
-    body.visible {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
+      text-align: center;
     }
 
     h1 {
-      font-size: 3em;
+      font-size: 2.5em;
       font-family: 'Playfair Display', serif;
-      font-weight: bold;
       color: #5a9ea8;
-      text-shadow: 0 0 15px #5a9ea8, 0 0 30px #3b6d74;
       margin-bottom: 20px;
     }
 
@@ -49,44 +30,38 @@
     }
 
     li {
-      font-size: 1.5em;
+      font-size: 1.2em;
       font-family: 'Roboto', sans-serif;
       color: #f5f5dc;
-      margin-bottom: 15px;
-      line-height: 1.6;
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+      margin-bottom: 10px;
     }
 
     .paper {
       background: rgba(249, 245, 236, 0.6);
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      max-width: 700px;
-      text-align: center;
-      z-index: 3;
+      padding: 20px;
+      border-radius: 10px;
       margin: 20px auto;
+      display: inline-block;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
     .button {
       display: inline-block;
-      padding: 12px 30px;
-      font-size: 1.1em;
-      font-weight: 500;
-      color: #000;
-      background: linear-gradient(45deg, #5a9ea8, #3b6d74);
+      padding: 10px 20px;
+      font-size: 1em;
+      color: #fff;
+      background: #5a9ea8;
       border: none;
-      border-radius: 50px;
+      border-radius: 5px;
       text-decoration: none;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(90, 158, 168, 0.4);
-      margin-top: 20px;
+      transition: background 0.3s ease;
     }
 
     .button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(90, 158, 168, 0.6);
+      background: #3b6d74;
     }
 
     .modal {
@@ -94,28 +69,18 @@
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%) scale(0.8);
-      width: 80%;
-      max-width: 500px;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 400px;
       background: rgba(0, 0, 0, 0.9);
       color: #fff;
       padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-      text-align: center;
-      opacity: 0;
-      transition: all 0.5s ease-in-out;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
     .modal.active {
       display: block;
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    .modal h2 {
-      margin-bottom: 15px;
     }
 
     .modal ul {
@@ -125,17 +90,16 @@
 
     .modal ul li {
       margin-bottom: 10px;
-      font-size: 1.2em;
     }
 
     .modal-close {
+      margin-top: 15px;
+      padding: 8px 15px;
       background: #5a9ea8;
       color: #fff;
       border: none;
-      border-radius: 50px;
-      padding: 10px 20px;
+      border-radius: 5px;
       cursor: pointer;
-      margin-top: 15px;
     }
 
     .modal-close:hover {
@@ -150,7 +114,7 @@
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.7);
-      z-index: 999;
+      z-index: 100;
     }
 
     #overlay.active {
@@ -159,14 +123,9 @@
   </style>
 </head>
 <body>
-  <canvas id="starCanvas"></canvas>
-
   <div id="main-content">
     <div class="paper">
       <h1>Фазы Луны</h1>
-      <p style="font-size: 1.2em; line-height: 1.8; font-family: 'Roboto', sans-serif; color: #555;">
-        Ближайшие фазы Луны:
-      </p>
       <ul id="moon-phases-list"></ul>
       <button class="button" id="showFullMoons">Ближайшие фазы</button>
       <a href="index.html" class="button">На главную</a>
