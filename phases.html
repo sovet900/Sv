@@ -13,13 +13,32 @@
       font-family: 'Roboto', Arial, sans-serif;
       background: radial-gradient(circle, #00111e, #090a0f);
       color: #e0e0e0;
-      text-align: center;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+    }
+
+    body.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
 
     h1 {
-      font-size: 2.5em;
+      font-size: 3em;
       font-family: 'Playfair Display', serif;
+      font-weight: bold;
       color: #5a9ea8;
+      text-shadow: 0 0 15px #5a9ea8, 0 0 30px #3b6d74;
       margin-bottom: 20px;
     }
 
@@ -30,38 +49,44 @@
     }
 
     li {
-      font-size: 1.2em;
+      font-size: 1.5em;
       font-family: 'Roboto', sans-serif;
       color: #f5f5dc;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      line-height: 1.6;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
     }
 
     .paper {
       background: rgba(249, 245, 236, 0.6);
-      padding: 20px;
-      border-radius: 10px;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      max-width: 700px;
+      text-align: center;
+      z-index: 3;
       margin: 20px auto;
-      display: inline-block;
-      width: 90%;
-      max-width: 500px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
     .button {
       display: inline-block;
-      padding: 10px 20px;
-      font-size: 1em;
-      color: #fff;
-      background: #5a9ea8;
+      padding: 12px 30px;
+      font-size: 1.1em;
+      font-weight: 500;
+      color: #000;
+      background: linear-gradient(45deg, #5a9ea8, #3b6d74);
       border: none;
-      border-radius: 5px;
+      border-radius: 50px;
       text-decoration: none;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(90, 158, 168, 0.4);
+      margin-top: 20px;
     }
 
     .button:hover {
-      background: #3b6d74;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(90, 158, 168, 0.6);
     }
 
     .modal {
@@ -69,18 +94,22 @@
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) scale(0.8);
       width: 90%;
       max-width: 400px;
       background: rgba(0, 0, 0, 0.9);
       color: #fff;
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
     }
 
     .modal.active {
       display: block;
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
     }
 
     .modal ul {
@@ -90,6 +119,7 @@
 
     .modal ul li {
       margin-bottom: 10px;
+      font-size: 1.2em;
     }
 
     .modal-close {
@@ -114,7 +144,6 @@
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.7);
-      z-index: 100;
     }
 
     #overlay.active {
@@ -123,6 +152,8 @@
   </style>
 </head>
 <body>
+  <canvas id="starCanvas"></canvas>
+
   <div id="main-content">
     <div class="paper">
       <h1>Фазы Луны</h1>
