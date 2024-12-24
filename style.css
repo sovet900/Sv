@@ -71,7 +71,7 @@ body {
 .main-content.hidden {
     opacity: 0;
     transform: translateY(50px);
-    transition: opacity 4s ease-in, transform 4s ease-in; /* Smooth slide up and fade in */
+    transition: opacity 4s ease-in, transform 4s ease-in;
 }
 
 .main-content.reveal {
@@ -93,7 +93,7 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 80%; /* Set the width of the combined block */
+    width: 80%;
     max-width: 800px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;

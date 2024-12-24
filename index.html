@@ -31,19 +31,31 @@
         <p>by Ascetic</p>
     </footer>
     <script>
-        // Script for ASCETIC animation and smooth content transition
         const asceticTitle = document.getElementById('ascetic-title');
         const mainContent = document.querySelector('.main-content');
 
         setTimeout(() => {
             asceticTitle.style.opacity = 0;
-        }, 1500); // Text now fades out after 1.5 seconds
+        }, 1500);
 
         setTimeout(() => {
             document.querySelector('.ascetic-container').style.display = 'none';
             mainContent.classList.remove('hidden');
             mainContent.classList.add('reveal');
-        }, 3500); // Page starts appearing after 3.5 seconds
+        }, 3500);
+
+        const starrySky = document.getElementById('starry-sky');
+        const createStar = () => {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.animationDuration = `${Math.random() * 2 + 1}s`;
+            starrySky.appendChild(star);
+            setTimeout(() => star.remove(), 3000);
+        };
+
+        setInterval(createStar, 100);
     </script>
 </body>
 </html>
