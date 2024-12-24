@@ -88,6 +88,62 @@
       transform: translateY(-3px);
       box-shadow: 0 10px 20px rgba(90, 158, 168, 0.6);
     }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      max-width: 500px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      text-align: center;
+    }
+
+    .modal h2 {
+      margin-bottom: 15px;
+    }
+
+    .modal ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .modal ul li {
+      margin-bottom: 10px;
+      font-size: 1.2em;
+    }
+
+    .modal-close {
+      background: #5a9ea8;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 20px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .modal-close:hover {
+      background: #3b6d74;
+    }
+
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 999;
+    }
   </style>
 </head>
 <body>
@@ -101,17 +157,22 @@
       </p>
       <ul id="moon-phases-list"></ul>
       <a href="steps.html" class="button">Перейти к ритуалу</a>
+      <button class="button" id="showFullMoons">Ближайшие полнолуния</button>
     </div>
+  </div>
+
+  <div id="overlay"></div>
+  <div class="modal" id="fullMoonModal">
+    <h2>Ближайшие полнолуния</h2>
+    <ul id="fullMoonList"></ul>
+    <button class="modal-close" id="closeModal">Закрыть</button>
   </div>
 
   <script>
     window.onload = function () {
       document.body.classList.add("visible");
 
-      // Проверка существования canvas
       const canvas = document.getElementById('starCanvas');
-      if (!canvas) return;
-
       const ctx = canvas.getContext('2d');
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -180,6 +241,26 @@
       };
     }
 
+    function getFullMoonsForYear() {
+      const lunarCycle = 29.53058867;
+      const knownNewMoon = new Date(Date.UTC(2000, 0, 6, 18, 14));
+      const fullMoons = [];
+      const today = new Date();
+      const startOfYear = new Date(today.getFullYear(), 0, 1);
+
+      let currentFullMoon = new Date(knownNewMoon);
+      while (currentFullMoon < startOfYear) {
+        currentFullMoon = new Date(currentFullMoon.getTime() + lunarCycle * 24 * 60 * 60 * 1000);
+      }
+
+      while (currentFullMoon.getFullYear() === today.getFullYear()) {
+        fullMoons.push(currentFullMoon.toLocaleDateString('ru-RU'));
+        currentFullMoon = new Date(currentFullMoon.getTime() + lunarCycle * 24 * 60 * 60 * 1000);
+      }
+
+      return fullMoons;
+    }
+
     function displayMoonPhases() {
       const phases = calculateMoonPhases();
       const list = document.getElementById('moon-phases-list');
@@ -188,6 +269,22 @@
         <li>Ближайшее полнолуние: ${phases.nextFullMoon}</li>
       `;
     }
+
+    function showFullMoonModal() {
+      const fullMoonList = document.getElementById('fullMoonList');
+      const fullMoons = getFullMoonsForYear();
+      fullMoonList.innerHTML = fullMoons.map(date => `<li>${date}</li>`).join('');
+      document.getElementById('overlay').style.display = 'block';
+      document.getElementById('fullMoonModal').style.display = 'block';
+    }
+
+    function closeFullMoonModal() {
+      document.getElementById('overlay').style.display = 'none';
+      document.getElementById('fullMoonModal').style.display = 'none';
+    }
+
+    document.getElementById('showFullMoons').addEventListener('click', showFullMoonModal);
+    document.getElementById('closeModal').addEventListener('click', closeFullMoonModal);
 
     displayMoonPhases();
   </script>
