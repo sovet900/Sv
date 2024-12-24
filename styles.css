@@ -1,84 +1,105 @@
-/* Общий фон */
+/* Общий стиль для body */
 body {
-  margin: 0;
-  background: radial-gradient(circle, #0a0f29 20%, #000216 80%);
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  color: #f5f5dc;
-  overflow-y: auto; /* Вертикальная прокрутка */
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    color: #ffffff;
+    background: #000000; /* Чёрный фон для звёзд */
+    background-image: url('stars.png'); /* Подставьте свою картинку звёзд */
+    background-size: cover;
+    background-attachment: fixed;
+    overflow-x: hidden;
 }
 
-/* Звёзды */
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+/* Анимация мерцания звёзд */
+@keyframes twinkling {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; }
+    100% { opacity: 0.8; }
 }
 
-/* Основной контент */
-#main-content {
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 20px;
-  border: 2px solid rgba(212, 175, 55, 0.5); /* Приглушённая золотая рамка */
-  border-radius: 15px;
-  background: rgba(0, 0, 0, 0.6);
-  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-  overflow: auto; /* Чтобы контент не выходил за рамки */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0) 70%);
+    z-index: -1;
+    animation: twinkling 5s infinite;
 }
 
-/* Заголовки */
+/* Прозрачные блоки */
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1); /* Прозрачный блок */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px); /* Размытие фона */
+    text-align: center;
+}
+
+/* Стиль заголовков */
 h1 {
-  font-size: 2.5em;
-  font-weight: bold;
-  color: #ffdd00;
-  text-shadow: 0 0 10px rgba(255, 223, 0, 0.8), 0 0 20px rgba(255, 223, 0, 0.6);
-  text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
 
-h2 {
-  font-size: 1.8em;
-  font-weight: bold;
-  color: #87ceeb;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  text-shadow: 0 0 5px rgba(135, 206, 235, 0.5);
-}
-
-/* Текст */
+/* Стиль текста */
 p, li {
-  font-size: 1.2em;
-  line-height: 1.8;
-  margin-bottom: 10px;
+    font-size: 1.2em;
+    line-height: 1.8;
 }
 
+/* Кнопки */
+button {
+    padding: 15px 30px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #000000;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #ffd700;
+    transform: scale(1.1);
+}
+
+/* Список */
 ol {
-  margin: 20px 0;
-  padding-left: 20px;
+    text-align: left;
+    margin: 20px auto;
+    padding: 0;
+    max-width: 600px;
 }
 
+/* Убираем отступы у списка */
 ol li {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
-/* Кнопка */
-.button {
-  display: block;
-  width: fit-content;
-  margin: 20px auto;
-  padding: 10px 25px;
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #fff;
-  background: #32a852;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: transform 0.3s ease, background 0.3s ease;
-}
-
-.button:hover {
-  transform: scale(1.1);
-  background: #2e8b57;
+/* Для адаптивности */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px;
+        padding: 15px;
+    }
+    h1 {
+        font-size: 2em;
+    }
+    p, li {
+        font-size: 1em;
+    }
+    button {
+        padding: 10px 20px;
+    }
 }
