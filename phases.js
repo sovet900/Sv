@@ -1,22 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Mock functions to calculate phases
+    // Пример расчёта фаз Луны (замените на реальную логику, если нужно)
     const getNextFullMoon = () => {
         const today = new Date();
-        const fullMoon = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7); // Example: 7 days later
+        const fullMoon = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
         return fullMoon.toLocaleDateString();
     };
 
     const getNextNewMoon = () => {
         const today = new Date();
-        const newMoon = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 14); // Example: 14 days later
+        const newMoon = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 14);
         return newMoon.toLocaleDateString();
     };
 
-    // Set phases dynamically
+    // Заполняем данные фаз Луны
     document.getElementById("full-moon-date").textContent = getNextFullMoon();
     document.getElementById("new-moon-date").textContent = getNextNewMoon();
 
-    // Load ritual description
+    // Загрузка описания ритуала
     fetch("ritual.txt")
         .then(response => response.text())
         .then(text => {
