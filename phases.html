@@ -94,16 +94,24 @@
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) scale(0.8);
       width: 80%;
       max-width: 500px;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.9);
       color: #fff;
       padding: 20px;
       border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
       z-index: 1000;
       text-align: center;
+      opacity: 0;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .modal.active {
+      display: block;
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
     }
 
     .modal h2 {
@@ -144,6 +152,10 @@
       background: rgba(0, 0, 0, 0.7);
       z-index: 999;
     }
+
+    #overlay.active {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -156,78 +168,23 @@
         Ближайшие фазы Луны:
       </p>
       <ul id="moon-phases-list"></ul>
-      <a href="steps.html" class="button">Перейти к ритуалу</a>
-      <button class="button" id="showFullMoons">Ближайшие полнолуния</button>
+      <button class="button" id="showFullMoons">Ближайшие фазы</button>
+      <a href="index.html" class="button">На главную</a>
     </div>
   </div>
 
   <div id="overlay"></div>
   <div class="modal" id="fullMoonModal">
-    <h2>Ближайшие полнолуния</h2>
+    <h2>Фазы Луны</h2>
     <ul id="fullMoonList"></ul>
     <button class="modal-close" id="closeModal">Закрыть</button>
   </div>
 
   <script>
-    window.onload = function () {
-      document.body.classList.add("visible");
-
-      const canvas = document.getElementById('starCanvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-
-      let stars = [];
-      const numStars = 150;
-
-      function createStar() {
-        return {
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          radius: Math.random() * 2,
-          alpha: Math.random(),
-          speed: Math.random() * 0.05,
-        };
-      }
-
-      for (let i = 0; i < numStars; i++) {
-        stars.push(createStar());
-      }
-
-      function animateStars() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        stars.forEach((star) => {
-          star.alpha += star.speed;
-          if (star.alpha > 1 || star.alpha < 0) {
-            star.speed = -star.speed;
-          }
-
-          ctx.beginPath();
-          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
-          ctx.fill();
-        });
-
-        requestAnimationFrame(animateStars);
-      }
-
-      animateStars();
-
-      window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        stars = [];
-        for (let i = 0; i < numStars; i++) {
-          stars.push(createStar());
-        }
-      });
-    };
-
     function calculateMoonPhases() {
-      const today = new Date();
       const lunarCycle = 29.53058867;
       const knownNewMoon = new Date(Date.UTC(2000, 0, 6, 18, 14));
+      const today = new Date();
       const daysSinceKnownNewMoon = (today - knownNewMoon) / (1000 * 60 * 60 * 24);
       const cyclesSinceKnownNewMoon = Math.floor(daysSinceKnownNewMoon / lunarCycle);
 
@@ -241,50 +198,50 @@
       };
     }
 
-    function getFullMoonsForYear() {
+    function getMoonPhasesForYear() {
       const lunarCycle = 29.53058867;
       const knownNewMoon = new Date(Date.UTC(2000, 0, 6, 18, 14));
-      const fullMoons = [];
       const today = new Date();
-      const startOfYear = new Date(today.getFullYear(), 0, 1);
+      const moonPhases = [];
+      let currentPhase = new Date(knownNewMoon);
 
-      let currentFullMoon = new Date(knownNewMoon);
-      while (currentFullMoon < startOfYear) {
-        currentFullMoon = new Date(currentFullMoon.getTime() + lunarCycle * 24 * 60 * 60 * 1000);
+      while (currentPhase.getFullYear() <= today.getFullYear()) {
+        const type = moonPhases.length % 2 === 0 ? 'Новолуние' : 'Полнолуние';
+        if (currentPhase >= today) {
+          moonPhases.push(`${type}: ${currentPhase.toLocaleDateString('ru-RU')}`);
+        }
+        currentPhase = new Date(currentPhase.getTime() + lunarCycle * 24 * 60 * 60 * 1000 / 2);
       }
 
-      while (currentFullMoon.getFullYear() === today.getFullYear()) {
-        fullMoons.push(currentFullMoon.toLocaleDateString('ru-RU'));
-        currentFullMoon = new Date(currentFullMoon.getTime() + lunarCycle * 24 * 60 * 60 * 1000);
-      }
-
-      return fullMoons;
+      return moonPhases;
     }
+
+    function showMoonPhasesModal() {
+      const modal = document.getElementById('fullMoonModal');
+      const overlay = document.getElementById('overlay');
+      const list = document.getElementById('fullMoonList');
+      const moonPhases = getMoonPhasesForYear();
+
+      list.innerHTML = moonPhases.map(phase => `<li>${phase}</li>`).join('');
+      modal.classList.add('active');
+      overlay.classList.add('active');
+    }
+
+    function closeMoonPhasesModal() {
+      document.getElementById('fullMoonModal').classList.remove('active');
+      document.getElementById('overlay').classList.remove('active');
+    }
+
+    document.getElementById('showFullMoons').addEventListener('click', showMoonPhasesModal);
+    document.getElementById('closeModal').addEventListener('click', closeMoonPhasesModal);
 
     function displayMoonPhases() {
       const phases = calculateMoonPhases();
-      const list = document.getElementById('moon-phases-list');
-      list.innerHTML = `
+      document.getElementById('moon-phases-list').innerHTML = `
         <li>Ближайшее новолуние: ${phases.nextNewMoon}</li>
         <li>Ближайшее полнолуние: ${phases.nextFullMoon}</li>
       `;
     }
-
-    function showFullMoonModal() {
-      const fullMoonList = document.getElementById('fullMoonList');
-      const fullMoons = getFullMoonsForYear();
-      fullMoonList.innerHTML = fullMoons.map(date => `<li>${date}</li>`).join('');
-      document.getElementById('overlay').style.display = 'block';
-      document.getElementById('fullMoonModal').style.display = 'block';
-    }
-
-    function closeFullMoonModal() {
-      document.getElementById('overlay').style.display = 'none';
-      document.getElementById('fullMoonModal').style.display = 'none';
-    }
-
-    document.getElementById('showFullMoons').addEventListener('click', showFullMoonModal);
-    document.getElementById('closeModal').addEventListener('click', closeFullMoonModal);
 
     displayMoonPhases();
   </script>
