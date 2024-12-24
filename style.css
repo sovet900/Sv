@@ -50,11 +50,11 @@ body {
 
 #ascetic-title {
     font-family: 'Cinzel', serif;
-    font-size: 4rem;
+    font-size: 3.5rem; /* Reduced size for text */
     font-weight: 700;
     letter-spacing: 2px;
     opacity: 1;
-    animation: fadeOut 2s ease-in 1s forwards; /* Hold for 1 second, fade out over 2 seconds */
+    animation: fadeOut 1.5s ease-in 1s forwards; /* Hold for 1 second, fade out over 1.5 seconds */
     color: #fff;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
@@ -70,13 +70,13 @@ body {
 
 .main-content.hidden {
     opacity: 0;
-    transform: scale(0.9); /* Start slightly smaller */
-    transition: opacity 3s ease-in, transform 3s ease-in; /* Smooth scale and fade */
+    transform: translateY(50px); /* Start with downward position */
+    transition: opacity 4s ease-in, transform 4s ease-in; /* Smooth fade and slide effect */
 }
 
 .main-content.reveal {
     opacity: 1;
-    transform: scale(1); /* Return to normal scale */
+    transform: translateY(0); /* Slide into original position */
 }
 
 .main-content {
