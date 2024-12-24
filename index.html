@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стакан Воды</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="ascetic-container">
+        <div id="ascetic-title">ASCETIC</div>
+    </div>
+    <div class="main-content" style="display: none;">
+        <div class="container">
+            <div class="image-container">
+                <img src="water-glass.png" alt="Стакан воды">
+            </div>
+            <div class="text-placeholder">
+                <!-- Placeholder for your text -->
+                <p>Добавьте свой текст здесь</p>
+            </div>
+            <div class="link-container">
+                <a href="ritual.html" class="next-page">Перейти к инструкции</a>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>by Ascetic</p>
+    </footer>
+    <script>
+        // Script for ASCETIC animation and transition
+        const asceticTitle = document.getElementById('ascetic-title');
+        const mainContent = document.querySelector('.main-content');
+
+        setTimeout(() => {
+            asceticTitle.style.opacity = 0;
+        }, 2000);
+
+        setTimeout(() => {
+            document.querySelector('.ascetic-container').style.display = 'none';
+            mainContent.style.display = 'block';
+        }, 3000);
+    </script>
+</body>
+</html>
