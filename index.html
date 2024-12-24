@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="starry-sky"></div>
     <div class="ascetic-container">
         <div id="ascetic-title">ASCETIC</div>
     </div>
@@ -40,6 +41,20 @@
             document.querySelector('.ascetic-container').style.display = 'none';
             mainContent.style.display = 'block';
         }, 3000);
+
+        // JavaScript for stars
+        const starrySky = document.getElementById('starry-sky');
+        const createStar = () => {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.animationDuration = `${Math.random() * 2 + 1}s`;
+            starrySky.appendChild(star);
+            setTimeout(() => star.remove(), 3000); // Remove star after animation
+        };
+
+        setInterval(createStar, 100);
     </script>
 </body>
 </html>
