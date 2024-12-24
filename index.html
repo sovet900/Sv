@@ -14,11 +14,13 @@
     </div>
     <div class="main-content hidden">
         <div class="container">
-            <div class="image-container">
-                <img src="water-glass.png" alt="Стакан воды">
-            </div>
-            <div class="text-placeholder">
-                <p>Добавьте свой текст здесь</p>
+            <div class="content-block">
+                <div class="image-container">
+                    <img src="water-glass.png" alt="Стакан воды">
+                </div>
+                <div class="text-placeholder">
+                    <p>Добавьте свой текст здесь. Расскажите о магии стакана воды и как использовать его для исполнения желаний.</p>
+                </div>
             </div>
             <div class="link-container">
                 <a href="ritual.html" class="next-page">Инструкция</a>
@@ -42,20 +44,6 @@
             mainContent.classList.remove('hidden');
             mainContent.classList.add('reveal');
         }, 3500); // Page starts appearing after 3.5 seconds
-
-        // Script to generate and animate stars
-        const starrySky = document.getElementById('starry-sky');
-        const createStar = () => {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.top = `${Math.random() * 100}%`;
-            star.style.left = `${Math.random() * 100}%`;
-            star.style.animationDuration = `${Math.random() * 2 + 1}s`;
-            starrySky.appendChild(star);
-            setTimeout(() => star.remove(), 3000); // Remove after animation
-        };
-
-        setInterval(createStar, 100);
     </script>
 </body>
 </html>
