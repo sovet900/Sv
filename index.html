@@ -1,144 +1,61 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стакан Воды</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="starry-sky"></div>
+    <div class="ascetic-container">
+        <div id="ascetic-title">ASCETIC</div>
+    </div>
+    <div class="main-content hidden">
+        <div class="container">
+            <div class="image-container">
+                <img src="water-glass.png" alt="Стакан воды">
+            </div>
+            <div class="text-placeholder">
+                <p>Добавьте свой текст здесь</p>
+            </div>
+            <div class="link-container">
+                <a href="ritual.html" class="next-page">Инструкция</a>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>by Ascetic</p>
+    </footer>
+    <script>
+        // Script for ASCETIC animation and smooth content transition
+        const asceticTitle = document.getElementById('ascetic-title');
+        const mainContent = document.querySelector('.main-content');
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    color: #fff;
-    background: #000;
-    overflow: hidden;
-    position: relative;
-}
+        setTimeout(() => {
+            asceticTitle.style.opacity = 0;
+        }, 1500); // Text now fades out after 1.5 seconds
 
-#starry-sky {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    overflow: hidden;
-    z-index: -1;
-}
+        setTimeout(() => {
+            document.querySelector('.ascetic-container').style.display = 'none';
+            mainContent.classList.remove('hidden');
+            mainContent.classList.add('reveal');
+        }, 3500); // Page starts appearing after 3.5 seconds
 
-.star {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
-    animation: twinkle 2s ease-in-out infinite;
-    opacity: 0;
-}
+        // Script to generate and animate stars
+        const starrySky = document.getElementById('starry-sky');
+        const createStar = () => {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.animationDuration = `${Math.random() * 2 + 1}s`;
+            starrySky.appendChild(star);
+            setTimeout(() => star.remove(), 3000); // Remove after animation
+        };
 
-@keyframes twinkle {
-    0%, 100% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-}
-
-.ascetic-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    position: relative;
-}
-
-#ascetic-title {
-    font-family: 'Cinzel', serif;
-    font-size: 3.5rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    opacity: 1;
-    animation: fadeOut 1.5s ease-in 1s forwards;
-    color: #fff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-}
-
-@keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
-
-.main-content.hidden {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 4s ease-in, transform 4s ease-in; /* Smooth slide up and fade in */
-}
-
-.main-content.reveal {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 50px;
-}
-
-.image-container img {
-    border: 3px solid rgba(255, 255, 255, 0.4);
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-    max-width: 70%;
-    height: auto;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.image-container img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
-}
-
-.text-placeholder {
-    margin-top: 20px;
-    padding: 20px;
-    width: 80%;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-    text-align: center;
-}
-
-.link-container {
-    margin-top: 20px;
-}
-
-.next-page {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.2rem;
-    padding: 15px 30px;
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.next-page:hover {
-    background: rgba(255, 255, 255, 0.3);
-    color: #000;
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
-}
-
-footer {
-    position: fixed;
-    bottom: 10px;
-    width: 100%;
-    text-align: center;
-    font-size: 0.8rem;
-    opacity: 0.7;
-}
+        setInterval(createStar, 100);
+    </script>
+</body>
+</html>
