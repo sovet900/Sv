@@ -70,11 +70,13 @@ body {
 
 .main-content.hidden {
     opacity: 0;
-    transition: opacity 3s ease-in; /* Smooth transition over 3 seconds */
+    transform: scale(0.9); /* Start slightly smaller */
+    transition: opacity 3s ease-in, transform 3s ease-in; /* Smooth scale and fade */
 }
 
-.main-content.fade-in {
+.main-content.reveal {
     opacity: 1;
+    transform: scale(1); /* Return to normal scale */
 }
 
 .main-content {
