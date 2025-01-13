@@ -2,31 +2,20 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>ASCETIC — Стакан Воды</title>
-  <!-- Шрифт Cinzel -->
+  <title>Инструкция по ритуалу — ASCETIC</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* Общие стили */
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
     body {
+      margin: 0; padding: 0; 
       font-family: 'Cinzel', serif;
-      background: #000;
+      background: #000; 
       color: rgba(255,255,255,0.8);
-      overflow: hidden; /* для эффекта звёзд */
-    }
-    a {
-      color: rgba(255,255,255,0.7);
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
+      overflow: hidden;
     }
 
-    /* Анимация звёзд (псевдоэлементы) */
+    /* Анимация звёзд (как на главной) */
     body::before, body::after {
       content: "";
       position: fixed;
@@ -35,14 +24,12 @@
       background: transparent;
       z-index: 1;
     }
-    /* Первый слой звёзд */
     body::before {
       background: radial-gradient(2px 2px at 5px 5px, #fff, transparent) repeat;
       background-size: 100px 100px;
       animation: twinkle 10s infinite;
       opacity: 0.5;
     }
-    /* Второй слой звёзд */
     body::after {
       background: radial-gradient(1px 1px at 3px 3px, #fff, transparent) repeat;
       background-size: 60px 60px;
@@ -54,235 +41,58 @@
       50% { opacity: 1; }
     }
 
-    /* Контейнер для контента */
     .container {
       position: relative;
       width: 100vw; height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      z-index: 2; /* поверх звёзд */
-    }
-
-    /* Вступительная надпись ASCETIC */
-    #ascetic-intro {
-      position: absolute;
-      font-size: 2rem;
-      text-align: center;
-      opacity: 1;
-      transition: opacity 0.8s ease;
-    }
-
-    /* Основной блок, скрыт вначале */
-    #main-content {
-      opacity: 0;
-      transition: opacity 1s ease;
-      display: flex;
+      display: flex; 
       flex-direction: column;
-      align-items: center;
-    }
-    #main-content.visible {
-      opacity: 1;
+      align-items: center; 
+      justify-content: center;
+      z-index: 2;
+      padding: 2rem;
+      text-align: center;
     }
 
-    /* Прозрачный блок под текст */
     .info-block {
       background: rgba(255,255,255,0.05);
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(255,255,255,0.2);
-      padding: 1.5rem;
-      margin-top: 1rem;
-      text-align: center;
-      width: 300px;
-      max-width: 80%;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+
+      /* Адаптивная высота: подгоняем под экран */
+      max-height: 80vh; 
+      overflow-y: auto;
     }
 
-    /* Кнопка */
-    .button {
+    a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      display: inline-block;
       margin-top: 1rem;
-      padding: 0.8rem 1.2rem;
+      padding: 0.7rem 1.2rem;
       background: rgba(255,255,255,0.1);
-      border: none;
       border-radius: 5px;
-      cursor: pointer;
-      color: #fff;
       transition: background 0.3s;
     }
-    .button:hover {
+    a:hover {
       background: rgba(255,255,255,0.3);
-    }
-
-    /* Блок для ближайших дат */
-    .moon-dates {
-      position: absolute;
-      top: 10px; right: 10px;
-      background: rgba(255,255,255,0.06);
-      padding: 0.8rem;
-      border-radius: 8px;
-      box-shadow: 0 0 8px rgba(255,255,255,0.3);
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
-    .moon-dates strong {
-      color: #ffd9b3; /* слегка другой цвет для дат */
-    }
-
-    /* Стили для всплывающей таблицы */
-    #dates-modal {
-      position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0,0,0,0.9);
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(255,255,255,0.3);
-      display: none; /* скрыто по умолчанию */
-      z-index: 99;
-      max-width: 90%;
-      overflow-y: auto;
-      max-height: 80vh;
-    }
-    #dates-modal table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1rem 0;
-    }
-    #dates-modal th, #dates-modal td {
-      border: 1px solid rgba(255,255,255,0.3);
-      padding: 0.5rem;
-      text-align: center;
-    }
-    #dates-modal th {
-      background: rgba(255,255,255,0.1);
-    }
-    #modal-close {
-      margin-top: 0.5rem;
-      display: inline-block;
-      background: rgba(255,255,255,0.2);
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-    }
-    #modal-close:hover {
-      background: rgba(255,255,255,0.4);
     }
   </style>
 </head>
 <body>
-
-<!-- Две ближайшие даты -->
-<div class="moon-dates" id="moon-dates-toggle">
-  <div><strong>Полнолуние:</strong> 14 янв 2025, 01:27</div>
-  <div><strong>Новолуние:</strong> 29 янв 2025, 15:37</div>
-</div>
-
-<!-- Модальное окно со всеми датами -->
-<div id="dates-modal">
-  <h2>Ближайшие даты полнолуний и новолуний</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Полнолуние</th>
-        <th>Новолуние</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>14 января 2025 (01:27)</td>
-        <td>29 января 2025 (15:37)</td>
-      </tr>
-      <tr>
-        <td>13 февраля 2025</td>
-        <td>28 февраля 2025</td>
-      </tr>
-      <tr>
-        <td>15 марта 2025</td>
-        <td>30 марта 2025</td>
-      </tr>
-      <tr>
-        <td>13 апреля 2025</td>
-        <td>29 апреля 2025</td>
-      </tr>
-      <tr>
-        <td>12 мая 2025</td>
-        <td>28 мая 2025</td>
-      </tr>
-      <tr>
-        <td>11 июня 2025</td>
-        <td>26 июня 2025</td>
-      </tr>
-      <tr>
-        <td>10 июля 2025</td>
-        <td>25 июля 2025</td>
-      </tr>
-      <tr>
-        <td>9 августа 2025</td>
-        <td>24 августа 2025</td>
-      </tr>
-      <tr>
-        <td>8 сентября 2025</td>
-        <td>23 сентября 2025</td>
-      </tr>
-      <tr>
-        <td>7 октября 2025</td>
-        <td>22 октября 2025</td>
-      </tr>
-      <tr>
-        <td>6 ноября 2025</td>
-        <td>21 ноября 2025</td>
-      </tr>
-      <tr>
-        <td>5 декабря 2025</td>
-        <td>20 декабря 2025</td>
-      </tr>
-    </tbody>
-  </table>
-  <a href="#" id="modal-close">Закрыть</a>
-</div>
-
-<div class="container">
-  <!-- Вступительная надпись -->
-  <div id="ascetic-intro">ASCETIC</div>
-
-  <!-- Основной контент -->
-  <div id="main-content">
-    <img src="water-glass.png" alt="Стакан воды" style="width:150px; height:auto;">
-    
+  <div class="container">
     <div class="info-block">
-      <p>Здесь будет ваш мистический текст о ритуале «Стакан воды». 
-        Медитируйте, сосредотачивайтесь на намерениях и позволяйте воде впитать вашу энергию.
-      </p>
+      <h1>Ритуал «Стакан Воды»</h1>
+      <p>1. Найдите тихое место и поставьте перед собой стакан с чистой водой.</p>
+      <p>2. Закройте глаза, успокойте дыхание. Почувствуйте свои желания и намерения.</p>
+      <p>3. Воображайте, что ваша энергия переходит в воду, очищая вас и усиливая намерение.</p>
+      <p>4. Через несколько минут выпейте воду медленно и осознанно.</p>
+      <p>5. Поблагодарите себя и воду за помощь в реализации задуманного.</p>
+
+      <a href="index.html">Вернуться на главную</a>
     </div>
-
-    <button class="button" onclick="location.href='ritual.html'">Инструкция</button>
   </div>
-</div>
-
-<script>
-  // По загрузке страницы надпись ASCETIC исчезает через 1.5 секунды
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.getElementById('ascetic-intro').style.opacity = '0';
-      // Плавное появление основного контента
-      setTimeout(() => {
-        document.getElementById('main-content').classList.add('visible');
-      }, 800);
-    }, 1500);
-  });
-
-  // Открытие / Закрытие модального окна со всеми датами
-  const moonDatesToggle = document.getElementById('moon-dates-toggle');
-  const datesModal = document.getElementById('dates-modal');
-  const modalClose = document.getElementById('modal-close');
-
-  moonDatesToggle.addEventListener('click', () => {
-    datesModal.style.display = 'block';
-  });
-
-  modalClose.addEventListener('click', (e) => {
-    e.preventDefault();
-    datesModal.style.display = 'none';
-  });
-</script>
-
 </body>
 </html>
