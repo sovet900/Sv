@@ -80,7 +80,6 @@
       flex-direction: column;
       align-items: center;
     }
-    /* При отображении присваиваем класс .visible */
     #main-content.visible {
       opacity: 1;
     }
@@ -112,7 +111,7 @@
       background: rgba(255,255,255,0.3);
     }
 
-    /* Всплывающие даты (пример) */
+    /* Блок для ближайших дат */
     .moon-dates {
       position: absolute;
       top: 10px; right: 10px;
@@ -121,14 +120,123 @@
       border-radius: 8px;
       box-shadow: 0 0 8px rgba(255,255,255,0.3);
       font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .moon-dates strong {
+      color: #ffd9b3; /* слегка другой цвет для дат */
+    }
+
+    /* Стили для всплывающей таблицы */
+    #dates-modal {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.9);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+      display: none; /* скрыто по умолчанию */
+      z-index: 99;
+      max-width: 90%;
+      overflow-y: auto;
+      max-height: 80vh;
+    }
+    #dates-modal table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    #dates-modal th, #dates-modal td {
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 0.5rem;
+      text-align: center;
+    }
+    #dates-modal th {
+      background: rgba(255,255,255,0.1);
+    }
+    #modal-close {
+      margin-top: 0.5rem;
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+    }
+    #modal-close:hover {
+      background: rgba(255,255,255,0.4);
     }
   </style>
 </head>
 <body>
 
-<div class="moon-dates">
-  <strong>Новолуние:</strong> 11.02<br>
-  <strong>Полнолуние:</strong> 26.02
+<!-- Две ближайшие даты -->
+<div class="moon-dates" id="moon-dates-toggle">
+  <div><strong>Полнолуние:</strong> 14 янв 2025, 01:27</div>
+  <div><strong>Новолуние:</strong> 29 янв 2025, 15:37</div>
+</div>
+
+<!-- Модальное окно со всеми датами -->
+<div id="dates-modal">
+  <h2>Ближайшие даты полнолуний и новолуний</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Полнолуние</th>
+        <th>Новолуние</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>14 января 2025 (01:27)</td>
+        <td>29 января 2025 (15:37)</td>
+      </tr>
+      <tr>
+        <td>13 февраля 2025</td>
+        <td>28 февраля 2025</td>
+      </tr>
+      <tr>
+        <td>15 марта 2025</td>
+        <td>30 марта 2025</td>
+      </tr>
+      <tr>
+        <td>13 апреля 2025</td>
+        <td>29 апреля 2025</td>
+      </tr>
+      <tr>
+        <td>12 мая 2025</td>
+        <td>28 мая 2025</td>
+      </tr>
+      <tr>
+        <td>11 июня 2025</td>
+        <td>26 июня 2025</td>
+      </tr>
+      <tr>
+        <td>10 июля 2025</td>
+        <td>25 июля 2025</td>
+      </tr>
+      <tr>
+        <td>9 августа 2025</td>
+        <td>24 августа 2025</td>
+      </tr>
+      <tr>
+        <td>8 сентября 2025</td>
+        <td>23 сентября 2025</td>
+      </tr>
+      <tr>
+        <td>7 октября 2025</td>
+        <td>22 октября 2025</td>
+      </tr>
+      <tr>
+        <td>6 ноября 2025</td>
+        <td>21 ноября 2025</td>
+      </tr>
+      <tr>
+        <td>5 декабря 2025</td>
+        <td>20 декабря 2025</td>
+      </tr>
+    </tbody>
+  </table>
+  <a href="#" id="modal-close">Закрыть</a>
 </div>
 
 <div class="container">
@@ -141,7 +249,7 @@
     
     <div class="info-block">
       <p>Здесь будет ваш мистический текст о ритуале «Стакан воды». 
-        Медитируйте, сосредотачивайтесь на своих намерениях, позвольте воде впитать вашу энергию.
+        Медитируйте, сосредотачивайтесь на намерениях и позволяйте воде впитать вашу энергию.
       </p>
     </div>
 
@@ -159,6 +267,20 @@
         document.getElementById('main-content').classList.add('visible');
       }, 800);
     }, 1500);
+  });
+
+  // Открытие / Закрытие модального окна со всеми датами
+  const moonDatesToggle = document.getElementById('moon-dates-toggle');
+  const datesModal = document.getElementById('dates-modal');
+  const modalClose = document.getElementById('modal-close');
+
+  moonDatesToggle.addEventListener('click', () => {
+    datesModal.style.display = 'block';
+  });
+
+  modalClose.addEventListener('click', (e) => {
+    e.preventDefault();
+    datesModal.style.display = 'none';
   });
 </script>
 
