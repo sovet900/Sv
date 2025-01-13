@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>ASCETIC — Стакан Воды</title>
-  <!-- Мета-тег для адаптивности (важно для мобильных устройств) -->
+  <!-- Мета-тег для мобильной адаптивности -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Подключаем шрифт Cinzel -->
@@ -15,52 +15,45 @@
   >
 
   <style>
-    /* Сбрасываем отступы, выравниваем box-sizing */
+    /* ============= Сброс и глобальные стили ============= */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
-    /* Стиль для body: фон, шрифт, цвет текста, убрали overflow: hidden; 
-       чтобы страница прокручивалась */
     body {
       font-family: 'Cinzel', serif;
-      background: #000;  /* чёрный фон */
-      color: rgba(255, 255, 255, 0.8); 
-      overflow-x: hidden; /* скрываем горизонтальную прокрутку (если вдруг) */
+      background: #000;
+      color: rgba(255,255,255,0.8);
+      overflow-x: hidden;  /* разрешаем вертикальный скролл, но прячем горизонтальный */
     }
-
-    /* Обычная ссылка чуть светлее, при наведении подчёркиваем */
     a {
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(255,255,255,0.7);
       text-decoration: none;
     }
     a:hover {
       text-decoration: underline;
     }
 
-    /* --- Анимация звёзд (два слоя) --- */
+    /* ============= Анимация звёзд на фоне ============= */
     body::before, 
     body::after {
       content: "";
       position: fixed;
-      top: 0;
+      top: 0; 
       left: 0;
       width: 100%; 
       height: 100%;
       background: transparent;
       z-index: 1;
-      pointer-events: none; /* чтобы клики не блокировались слоем звёзд */
+      pointer-events: none; /* чтобы клики не перекрывались звёздным слоем */
     }
-    /* Первый слой звёзд */
     body::before {
       background: radial-gradient(2px 2px at 5px 5px, #fff, transparent) repeat;
       background-size: 100px 100px;
       animation: twinkle 10s infinite;
       opacity: 0.5;
     }
-    /* Второй слой звёзд */
     body::after {
       background: radial-gradient(1px 1px at 3px 3px, #fff, transparent) repeat;
       background-size: 60px 60px;
@@ -71,21 +64,19 @@
       0%, 100% { opacity: 0.6; }
       50%      { opacity: 1; }
     }
-    /* --- Конец анимации звёзд --- */
 
-    /* Контейнер для всего основного контента */
+    /* ============= Контейнер ============= */
     .container {
-      /* Делаем адаптивную ширину, чтобы контент красиво сужался на мобильных */
-      max-width: 600px;    /* максимальная ширина 600 пикселей */
-      margin: 0 auto;      /* центрируем контейнер */
-      min-height: 100vh;   /* высота как минимум на весь экран */
-      padding: 2rem 1rem;  /* внешние отступы, чтобы текст не лип к краям */
-      text-align: center;  /* центрируем по горизонтали */
-      position: relative;  
-      z-index: 2;          /* звёзды - на фоне (z-index:1), а контент - выше */
+      max-width: 600px;   /* ограничиваем ширину, чтобы не растягивалось слишком широко */
+      margin: 0 auto;     /* центрируем по горизонтали */
+      min-height: 100vh;  /* высота экрана, если контента мало */
+      padding: 2rem 1rem; /* отступы внутри, чтобы текст не прилегал к краям */
+      position: relative;
+      text-align: center;
+      z-index: 2;         /* звёзды на фоне (z-index:1), контент поверх (z-index:2) */
     }
 
-    /* Блок двух ближайших дат (правый верхний угол), фиксирован поверх */
+    /* ============= Блок с ближайшими датами (правый верхний угол) ============= */
     .moon-dates {
       position: fixed;
       top: 10px;
@@ -96,30 +87,29 @@
       box-shadow: 0 0 8px rgba(255,255,255,0.3);
       font-size: 0.9rem;
       cursor: pointer;
-      z-index: 999; /* чтобы окно дат точно было поверх */
+      z-index: 999; /* сверху всего */
     }
     .moon-dates strong {
-      /* Цвет для выделения */
-      color: #ffd9b3;
+      color: #ffd9b3; /* легкое выделение */
     }
 
-    /* Модальное окно (при клике на даты) */
+    /* ============= Модальное окно (полный список дат) ============= */
     #dates-modal {
       position: fixed;
       top: 50%; 
       left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.9);
+      background: rgba(0,0,0,0.9);
       border: 1px solid rgba(255,255,255,0.2);
       padding: 1rem;
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(255,255,255,0.3);
       display: none;        /* изначально скрыто */
-      z-index: 9999;        /* поверх всего */
-      max-width: 90%;       /* окно не шире 90% экрана */
-      max-height: 80vh;     /* чтобы список не вылезал за экран */
-      overflow-y: auto;     /* прокрутка, если список большой */
-      text-align: center;   /* текст по центру */
+      z-index: 9999;
+      max-width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;     /* прокрутка, если дат очень много */
+      text-align: center;
     }
     #dates-modal h2 {
       margin-bottom: 1rem;
@@ -134,12 +124,12 @@
       border: 1px solid rgba(255,255,255,0.3);
       padding: 0.5rem;
       text-align: center;
-      word-wrap: break-word; 
+      word-wrap: break-word;
     }
     #dates-modal th {
       background: rgba(255,255,255,0.1);
     }
-    /* Кнопка "Закрыть" в модальном окне */
+    /* Кнопка "Закрыть" */
     #modal-close {
       margin-top: 0.5rem;
       display: inline-block;
@@ -154,151 +144,6 @@
       background: rgba(255,255,255,0.4);
     }
 
-    /* Заголовок ASCETIC */
+    /* ============= Заголовок ASCETIC ============= */
     #ascetic-intro {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;  /* небольшой отступ снизу */
-      transition: opacity 0.8s ease;
-    }
-
-    /* Основной контент по умолчанию скрыт */
-    #main-content {
-      opacity: 0;
-      transition: opacity 1s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;  /* чтобы картинка и кнопка были по центру */
-    }
-    /* Класс, который показывается после анимации */
-    #main-content.visible {
-      opacity: 1;
-    }
-
-    /* Картинка стакана воды (200px, но сжимается на узких экранах) */
-    .water-glass {
-      width: 200px;
-      max-width: 100%;
-      height: auto;
-    }
-
-    /* Прозрачный блок с текстом о ритуале */
-    .info-block {
-      background: rgba(255,255,255,0.05);
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.2);
-      padding: 1.5rem;
-      margin-top: 1rem;
-      text-align: left;  /* выравнивание текста по левому краю внутри блока */
-      width: 100%;
-    }
-
-    /* Кнопка "Инструкция" */
-    .button {
-      margin-top: 1.5rem;
-      padding: 0.8rem 1.2rem;
-      background: rgba(255,255,255,0.1);
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      color: #fff;
-      transition: background 0.3s;
-    }
-    .button:hover {
-      background: rgba(255,255,255,0.3);
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- Фиксированный блок двух ближайших дат (справа вверху) -->
-  <div class="moon-dates" id="moon-dates-toggle">
-    <div><strong>Полнолуние:</strong> 14 янв 2025, 01:27</div>
-    <div><strong>Новолуние:</strong> 29 янв 2025, 15:37</div>
-  </div>
-
-  <!-- Модальное окно со всеми датами (полный список) -->
-  <div id="dates-modal">
-    <h2>Ближайшие даты полнолуний и новолуний</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Полнолуние</th>
-          <th>Новолуние</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>14 января 2025 (01:27)</td><td>29 января 2025 (15:37)</td></tr>
-        <tr><td>13 февраля 2025</td><td>28 февраля 2025</td></tr>
-        <tr><td>15 марта 2025</td><td>30 марта 2025</td></tr>
-        <tr><td>13 апреля 2025</td><td>29 апреля 2025</td></tr>
-        <tr><td>12 мая 2025</td><td>28 мая 2025</td></tr>
-        <tr><td>11 июня 2025</td><td>26 июня 2025</td></tr>
-        <tr><td>10 июля 2025</td><td>25 июля 2025</td></tr>
-        <tr><td>9 августа 2025</td><td>24 августа 2025</td></tr>
-        <tr><td>8 сентября 2025</td><td>23 сентября 2025</td></tr>
-        <tr><td>7 октября 2025</td><td>22 октября 2025</td></tr>
-        <tr><td>6 ноября 2025</td><td>21 ноября 2025</td></tr>
-        <tr><td>5 декабря 2025</td><td>20 декабря 2025</td></tr>
-      </tbody>
-    </table>
-    <a href="#" id="modal-close">Закрыть</a>
-  </div>
-
-  <!-- Основной контейнер -->
-  <div class="container">
-    <!-- Заголовок ASCETIC -->
-    <div id="ascetic-intro">ASCETIC</div>
-
-    <!-- Блок, который появится плавно после скрытия надписи ASCETIC -->
-    <div id="main-content">
-      <img src="water-glass.png" alt="Стакан воды" class="water-glass">
-
-      <div class="info-block">
-        <p>
-          Ритуал "Стакан воды" — это символическая практика, основанная на идее, что вода способна 
-          сохранять и передавать энергию и намерения человека. Считается, что во время взаимодействия 
-          с водой человек фокусируется на своём желании, а вода помогает усилить это намерение, 
-          выступая как посредник между мыслями и реальностью.
-        </p>
-        <p>
-          Это способ настроиться на позитивные изменения в жизни и 
-          активизировать внутренние ресурсы через концентрацию внимания и веру в результат.
-        </p>
-      </div>
-
-      <button class="button" onclick="location.href='ritual.html'">Инструкция</button>
-    </div>
-  </div>
-
-  <script>
-    // После полной загрузки окна
-    window.addEventListener('load', () => {
-      // Спустя 1.5 секунды начинаем скрывать заголовок ASCETIC
-      setTimeout(() => {
-        document.getElementById('ascetic-intro').style.opacity = '0';
-        // Ещё через 0.8 секунды делаем основной контент видимым
-        setTimeout(() => {
-          document.getElementById('main-content').classList.add('visible');
-        }, 800);
-      }, 1500);
-    });
-
-    // Клики по блоку с датами -> открыть модальное окно
-    const moonDatesToggle = document.getElementById('moon-dates-toggle');
-    const datesModal      = document.getElementById('dates-modal');
-    const modalClose      = document.getElementById('modal-close');
-
-    moonDatesToggle.addEventListener('click', () => {
-      datesModal.style.display = 'block';
-    });
-
-    // Клик по кнопке "Закрыть" внутри окна -> скрыть модальное окно
-    modalClose.addEventListener('click', (e) => {
-      e.preventDefault();
-      datesModal.style.display = 'none';
-    });
-  </script>
-
-</body>
-</html>
+      font-size: 2rem
