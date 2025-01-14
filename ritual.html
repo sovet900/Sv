@@ -4,29 +4,48 @@
   <meta charset="UTF-8">
   <title>Инструкция по ритуалу — ASCETIC</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Шрифт Cinzel -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" 
+    rel="stylesheet"
+  >
+
   <style>
+    /* Сброс и общие стили */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
-      margin: 0; 
-      padding: 0; 
       font-family: 'Cinzel', serif;
       background: #000; 
       color: rgba(255,255,255,0.8);
-      overflow: hidden;
+      overflow-x: hidden; /* только вертикальный скролл */
+    }
+    a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
     }
 
-    /* Анимация звёзд (как на главной) */
-    body::before, body::after {
+    /* Звёздный фон (два слоя) */
+    body::before, 
+    body::after {
       content: "";
       position: fixed;
       top: 0; 
       left: 0;
-      width: 100%; 
+      width: 100%;
       height: 100%;
       background: transparent;
       z-index: 1;
+      pointer-events: none;
     }
     body::before {
       background: radial-gradient(2px 2px at 5px 5px, #fff, transparent) repeat;
@@ -42,40 +61,36 @@
     }
     @keyframes twinkle {
       0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
+      50%      { opacity: 1; }
     }
 
+    /* Контейнер */
     .container {
-      position: relative;
-      width: 100vw; 
-      height: 100vh;
-      display: flex; 
-      flex-direction: column;
-      align-items: center; 
-      justify-content: center;
-      z-index: 2;
-      padding: 2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 2rem 1rem;
       text-align: center;
+      position: relative;
+      z-index: 2; /* чтобы звёзды были позади */
     }
 
+    /* Прозрачный блок с инструкциями */
     .info-block {
       background: rgba(255,255,255,0.05);
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(255,255,255,0.2);
       padding: 2rem;
-      max-width: 600px;
       margin: auto;
-
-      /* Адаптивная высота: подгоняем под экран */
-      max-height: 80vh; 
+      max-width: 100%;
+      max-height: 80vh; /* если текст длинный — появится прокрутка */
       overflow-y: auto;
+      text-align: left;
     }
-
+    /* Ссылка-кнопка «Вернуться на главную» */
     a {
-      color: rgba(255,255,255,0.7);
-      text-decoration: none;
       display: inline-block;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       padding: 0.7rem 1.2rem;
       background: rgba(255,255,255,0.1);
       border-radius: 5px;
